@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 760" role="img" aria-labelledby="title desc">
+  <title id="title">Sorty app UI preview</title>
+  <desc id="desc">A playful mobile interface preview showing a garment scan and circularity recommendations.</desc>
+  <rect width="760" height="760" rx="40" fill="#bfe7d4"/>
+  <path d="M95 104c126-82 228-38 292 1 81 49 135 29 212 9 79-21 122 19 131 85 13 92-62 150-18 249 48 108-12 235-130 241-88 5-146-58-238-30-108 32-196 10-241-77-38-74-12-136-48-207-49-96-32-224 40-271Z" fill="#a8d8e8"/>
+  <rect x="254" y="52" width="252" height="656" rx="42" fill="#17342a"/>
+  <rect x="272" y="88" width="216" height="584" rx="30" fill="#fff9ed"/>
+  <rect x="316" y="105" width="128" height="10" rx="5" fill="#17342a"/>
+  <text x="302" y="156" fill="#17342a" font-family="Arial, sans-serif" font-size="26" font-weight="900">Sorty scan</text>
+  <rect x="303" y="181" width="154" height="190" rx="28" fill="#f7b6cf" stroke="#17342a" stroke-width="5"/>
+  <path d="M371 226c-29 0-51 21-51 49v56h120v-56c0-28-22-49-51-49h-18Z" fill="#ff664f"/>
+  <path d="M351 222c9 15 50 15 59 0" fill="none" stroke="#17342a" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="380" cy="404" r="41" fill="#d7ef70" stroke="#17342a" stroke-width="5"/>
+  <path d="m360 404 14 14 30-34" fill="none" stroke="#17342a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="310" y="469" fill="#17342a" font-family="Arial, sans-serif" font-size="15" font-weight="900">Best next pathway</text>
+  <rect x="302" y="489" width="156" height="44" rx="22" fill="#d7ef70" stroke="#17342a" stroke-width="4"/>
+  <text x="341" y="517" fill="#17342a" font-family="Arial, sans-serif" font-size="18" font-weight="900">Repair</text>
+  <rect x="302" y="547" width="156" height="38" rx="19" fill="#ffffff" stroke="#17342a" stroke-width="3"/>
+  <text x="324" y="572" fill="#17342a" font-family="Arial, sans-serif" font-size="14" font-weight="800">3 nearby places</text>
+  <rect x="302" y="601" width="156" height="38" rx="19" fill="#a8d8e8" stroke="#17342a" stroke-width="3"/>
+  <text x="331" y="625" fill="#17342a" font-family="Arial, sans-serif" font-size="14" font-weight="800">Map route</text>
+  <path d="M120 548c82-45 143-35 184 30" fill="none" stroke="#ff664f" stroke-width="20" stroke-linecap="round"/>
+  <path d="M570 183c60 44 64 101 12 173" fill="none" stroke="#d7ef70" stroke-width="20" stroke-linecap="round"/>
+  <circle cx="137" cy="173" r="33" fill="#f3cf4f" stroke="#17342a" stroke-width="6"/>
+  <circle cx="616" cy="608" r="44" fill="#f7b6cf" stroke="#17342a" stroke-width="6"/>
+</svg>

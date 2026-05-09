@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 760" role="img" aria-labelledby="title desc">
+  <title id="title">DreamStill community activation</title>
+  <desc id="desc">An illustrated community clothing swap and circular fashion event.</desc>
+  <rect width="760" height="760" rx="40" fill="#f7b6cf"/>
+  <rect x="74" y="92" width="612" height="506" rx="34" fill="#fff9ed" stroke="#17342a" stroke-width="8"/>
+  <rect x="74" y="92" width="612" height="88" rx="34" fill="#d7ef70" stroke="#17342a" stroke-width="8"/>
+  <text x="128" y="148" fill="#17342a" font-family="Arial, sans-serif" font-size="34" font-weight="900">Circular fashion night</text>
+  <rect x="124" y="226" width="170" height="254" rx="24" fill="#a8d8e8" stroke="#17342a" stroke-width="6"/>
+  <rect x="338" y="226" width="170" height="254" rx="24" fill="#f3cf4f" stroke="#17342a" stroke-width="6"/>
+  <rect x="552" y="226" width="84" height="254" rx="24" fill="#064d3b" stroke="#17342a" stroke-width="6"/>
+  <circle cx="179" cy="312" r="34" fill="#ff664f" stroke="#17342a" stroke-width="5"/>
+  <path d="M143 421c7-61 80-61 91 0" fill="#fff9ed" stroke="#17342a" stroke-width="5"/>
+  <circle cx="409" cy="314" r="34" fill="#bfe7d4" stroke="#17342a" stroke-width="5"/>
+  <path d="M371 421c10-61 79-61 91 0" fill="#fff9ed" stroke="#17342a" stroke-width="5"/>
+  <path d="M593 298v143" stroke="#fff9ed" stroke-width="10" stroke-linecap="round"/>
+  <path d="M574 334h38" stroke="#fff9ed" stroke-width="10" stroke-linecap="round"/>
+  <path d="M141 532c154 46 330 42 478 0" fill="none" stroke="#ff664f" stroke-width="16" stroke-linecap="round"/>
+  <path d="M133 653c74-53 136-49 204-3 72 49 145 49 230-7" fill="none" stroke="#064d3b" stroke-width="20" stroke-linecap="round"/>
+  <circle cx="117" cy="630" r="26" fill="#f3cf4f" stroke="#17342a" stroke-width="5"/>
+  <circle cx="626" cy="642" r="32" fill="#a8d8e8" stroke="#17342a" stroke-width="5"/>
+</svg>

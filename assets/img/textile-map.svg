@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 760" role="img" aria-labelledby="title desc">
+  <title id="title">Circular textile location map</title>
+  <desc id="desc">An illustrated map showing nearby repair, resale, donation, and recycling points.</desc>
+  <rect width="760" height="760" rx="40" fill="#a8d8e8"/>
+  <rect x="72" y="75" width="616" height="610" rx="38" fill="#fff9ed" stroke="#17342a" stroke-width="8"/>
+  <path d="M117 217c72-56 150-53 239-8 108 55 174 45 277-9" fill="none" stroke="#d7ef70" stroke-width="46" stroke-linecap="round"/>
+  <path d="M124 477c62-93 168-111 274-47 103 62 165 52 240-19" fill="none" stroke="#f7b6cf" stroke-width="44" stroke-linecap="round"/>
+  <path d="M225 125v510M380 125v510M535 125v510M118 278h524M118 392h524M118 562h524" stroke="#17342a" stroke-width="3" opacity="0.25"/>
+  <g fill="#ff664f" stroke="#17342a" stroke-width="6">
+    <path d="M213 290c0-36 29-65 65-65s65 29 65 65c0 49-65 115-65 115s-65-66-65-115Z"/>
+    <circle cx="278" cy="290" r="24" fill="#fff9ed"/>
+  </g>
+  <g fill="#064d3b" stroke="#17342a" stroke-width="6">
+    <path d="M460 445c0-36 29-65 65-65s65 29 65 65c0 49-65 115-65 115s-65-66-65-115Z"/>
+    <circle cx="525" cy="445" r="24" fill="#fff9ed"/>
+  </g>
+  <g fill="#f3cf4f" stroke="#17342a" stroke-width="6">
+    <path d="M164 529c0-29 24-53 53-53s53 24 53 53c0 40-53 94-53 94s-53-54-53-94Z"/>
+    <circle cx="217" cy="529" r="19" fill="#fff9ed"/>
+  </g>
+  <rect x="121" y="117" width="240" height="66" rx="22" fill="#17342a"/>
+  <text x="151" y="159" fill="#fff9ed" font-family="Arial, sans-serif" font-size="25" font-weight="900">Sorty locations</text>
+  <rect x="424" y="592" width="174" height="42" rx="21" fill="#d7ef70" stroke="#17342a" stroke-width="4"/>
+  <text x="449" y="620" fill="#17342a" font-family="Arial, sans-serif" font-size="17" font-weight="900">Open route</text>
+</svg>
