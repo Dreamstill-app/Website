@@ -5,6 +5,8 @@ import { Footer } from "@/components/Footer";
 import { SiteHeader } from "@/components/SiteHeader";
 import "./globals.css";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://dreamstill-app.github.io/Website";
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -19,7 +21,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://dreamstill.com"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Dreamstill | AI-powered textile circularity",
     template: "%s | Dreamstill",
@@ -41,7 +43,7 @@ export const metadata: Metadata = {
     title: "Dreamstill | Circular intelligence for fashion",
     description:
       "AI-powered circular decision-making infrastructure that helps clothing find its next life.",
-    url: "https://dreamstill.com",
+    url: siteUrl,
     siteName: "Dreamstill",
     type: "website",
   },
