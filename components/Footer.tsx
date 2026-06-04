@@ -6,6 +6,7 @@ const footerGroups = [
     links: [
       { href: "/sorty", label: "Sorty app" },
       { href: "/businesses", label: "Business partnerships" },
+      { href: "/portfolio", label: "Corporate experiences" },
       { href: "/impact", label: "Impact dashboard" },
     ],
   },
