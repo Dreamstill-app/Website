@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120" role="img" aria-labelledby="logoTitle">
+  <title id="logoTitle">Dreamstill</title>
+  <rect width="420" height="120" rx="24" fill="#000000"/>
+  <g transform="translate(28 18)">
+    <g fill="#E06B2E">
+      <path d="M42 8c-6 12-16 15-22 10-1 14 6 26 18 30 3-11 1-26-5-34 3-3 6-4 9-6z"/>
+      <path d="M42 8c6 12 16 15 22 10 1 14-6 26-18 30-3-11-1-26 5-34-3-3-6-4-9-6z"/>
+      <path d="M42 12c-4 8-3 18 2 24 4-6 7-15 3-24z"/>
+      <path d="M30 22c-4 6-3 14 2 18 4-5 6-12 2-18z"/>
+      <path d="M54 22c4 6 3 14-2 18-4-5-6-12-2-18z"/>
+      <path d="M22 34c-3 8 0 16 6 20 4-6 4-14 0-20z"/>
+      <path d="M62 34c3 8 0 16-6 20-4-6-4-14 0-20z"/>
+    </g>
+    <g fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" opacity="0.9">
+      <path d="M42 20v36"/>
+      <path d="M34 30l8 8 8-8"/>
+      <path d="M30 44l12 6 12-6"/>
+    </g>
+  </g>
+  <text x="118" y="72" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700" letter-spacing="0.12em">DREAMSTILL</text>
+</svg>

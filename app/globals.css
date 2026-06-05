@@ -87,6 +87,34 @@ select {
   margin-inline: auto;
 }
 
+.section-space {
+  padding-block: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-space {
+    padding-block: 3rem;
+  }
+}
+
+.page-title {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(2.65rem, 6vw, 4.35rem);
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+  color: var(--ink);
+}
+
+.page-subtitle {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(1.85rem, 4vw, 2.65rem);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+
 .premium-card {
   border: 1px solid rgba(42, 41, 37, 0.1);
   background: linear-gradient(145deg, rgba(255, 250, 241, 0.82), rgba(244, 234, 219, 0.62));

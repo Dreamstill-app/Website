@@ -1,154 +1,249 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { ButtonLink } from "@/components/ButtonLink";
 import { FadeIn } from "@/components/FadeIn";
 import { SectionHeader } from "@/components/SectionHeader";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "About",
+export const metadata: Metadata = createPageMetadata({
+  title: "About Dreamstill",
   description:
-    "Meet Dreamstill, the BIPOC female-led Vancouver climate technology company building circular fashion infrastructure.",
-};
+    "Meet the Dreamstill founders, origin story, and timeline building circular textile technology and community programming in Vancouver.",
+  path: "/about",
+});
 
 const values = [
-  "Human before technical",
-  "Reuse before recycling",
-  "Community before extraction",
-  "Infrastructure before optics",
+  {
+    title: "Innovation",
+    copy: "Building clean technology that turns textile decisions into clear, fast, actionable next steps.",
+  },
+  {
+    title: "Authenticity",
+    copy: "Showing up with honesty, imagination, and lived connection to fashion, culture, and climate work.",
+  },
+  {
+    title: "Environmental stewardship",
+    copy: "Prioritizing reuse, repair, resale, and recycling so garments stay in use longer and out of landfill.",
+  },
+  {
+    title: "Collaboration",
+    copy: "Working across communities, municipalities, research networks, and industry to build circular systems.",
+  },
 ];
 
 const timeline = [
   {
-    year: "Origin",
-    title: "A personal relationship with clothing waste",
-    copy: "Dreamstill began with the emotional weight many people feel when they no longer know what to do with clothing they once valued.",
+    season: "Spring 2024",
+    title: "Finding the problem in closets and donation piles",
+    copy: "We gathered community stories, mapped textile waste pain points, and learned how much value hides in unwanted clothing.",
+    outcome: "Outcome: validated that confusion — not apathy — drives most disposal decisions.",
   },
   {
-    year: "Insight",
-    title: "The problem was not care. It was decision-making.",
-    copy: "People, stores, and cities all face the same missing layer: fast, trusted, local guidance that keeps garments in use longer.",
+    season: "Summer 2024",
+    title: "Clothing swaps, styling, and resale experiments",
+    copy: "Dreamstill's first solutions came through hands-on circular fashion experiences across Vancouver.",
+    outcome: "Outcome: proved that joyful, tactile programming increases reuse behaviour.",
   },
   {
-    year: "Now",
-    title: "Sorty turns uncertainty into action.",
-    copy: "Our AI-powered textile circularity platform helps each garment find the most useful next pathway.",
+    season: "Fall 2024",
+    title: "Buildspace venture development",
+    copy: "We refined the venture narrative, tested assumptions, and shaped a stronger product direction.",
+    outcome: "Outcome: clarified Sorty as climate infrastructure, not just an events brand.",
   },
   {
-    year: "Future",
-    title: "Circular infrastructure for fashion.",
-    copy: "Dreamstill is building the connective tissue between closets, repair culture, resale, donation systems, municipalities, and recycling networks.",
+    season: "Spring 2025",
+    title: "Capstone app development with UBC",
+    copy: "Sorty advanced into a working prototype with computer vision, condition questions, and pathway recommendations.",
+    outcome: "Outcome: demonstrated scan-to-route flows with local map integration.",
   },
+  {
+    season: "Summer 2025",
+    title: "Community activations scaled",
+    copy: "Swaps, repair workshops, panels, and education expanded Dreamstill's public footprint.",
+    outcome: "Outcome: built recurring community demand and partner introductions.",
+  },
+  {
+    season: "Fall 2025",
+    title: "Industry and research partnerships",
+    copy: "Collaborations deepened with circular fashion hosts, Kelowna Fashion Weekend, and UBC Slow Fibre Research Cluster.",
+    outcome: "Outcome: connected product development to real-world circular ecosystems.",
+  },
+  {
+    season: "Spring 2026",
+    title: "Sorty launch preparation",
+    copy: "Sorty moves toward public release as a practical decision-support tool for residents, municipalities, and partners.",
+    outcome: "Outcome: opening pilot conversations with cities and institutions.",
+  },
+];
+
+const founders = [
+  {
+    name: "Khushi",
+    image: "/images/founders/khushi.svg",
+    linkedin: "https://ca.linkedin.com/company/dreamstilll",
+    paragraphs: [
+      "Khushi is the innovative co-founder of Dreamstill Technologies with a background in startup development and strategic planning. She has co-led social justice and creative expression initiatives by fostering team collaboration, securing funding, and executing growth strategies.",
+      "She is known for accelerating non-profit growth and boosting workplace productivity through EDI-forward operations, project management systems, and community engagement that elevates organizational visibility.",
+    ],
+  },
+  {
+    name: "Mars",
+    image: "/images/founders/mars.svg",
+    linkedin: "https://ca.linkedin.com/company/dreamstilll",
+    paragraphs: [
+      "Mars is a Brazilian environmental professional, actor, poet, and co-founder working across climate technology and Indigenous governance. As co-founder of Dreamstill, Mars leads the development of AI-driven solutions addressing textile waste and circular fashion systems.",
+      "Alongside Dreamstill, Mars serves as a Regulatory Engagement Coordinator with the Gitga'at First Nation, supporting environmental decision-making between industry, government, and community.",
+    ],
+  },
+];
+
+const advisors = [
+  "UBC Slow Fibre Research Cluster collaborators",
+  "Circular fashion community hosts across Metro Vancouver",
+  "Repair, resale, and donation partners informing Sorty routing logic",
 ];
 
 export default function AboutPage() {
   return (
-    <div className="pt-32">
-      <section className="container-shell py-16">
-        <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#8a6d58]">About Dreamstill</p>
-            <h1 className="font-serif mt-5 text-6xl leading-[0.95] tracking-[-0.06em] text-[#20201d] md:text-8xl">
-              A climate technology company with a human memory.
-            </h1>
-            <p className="mt-7 text-lg leading-8 text-[#5f5b52]">
-              Dreamstill is a BIPOC female-led circular fashion technology startup based in Vancouver. We help people
-              and industries understand the true value of clothing and enable circular textile systems.
-            </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href="/sorty">Explore Sorty</ButtonLink>
-              <ButtonLink href="/contact" variant="light">Partner with us</ButtonLink>
+    <div className="pt-28">
+      <section className="container-shell section-space">
+        <FadeIn>
+          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#8a6d58]">About us</p>
+          <h1 className="page-title mt-5 max-w-4xl">Change happens when people are empowered, inspired, and connected.</h1>
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-[#5f5b52]">
+            At Dreamstill, sustainability is a cultural and emotional journey. We help people rediscover agency and care
+            through the clothes they wear and the communities they belong to.
+          </p>
+        </FadeIn>
+      </section>
+
+      <section className="container-shell section-space">
+        <FadeIn>
+          <SectionHeader
+            eyebrow="Why we started"
+            title="The problem we lived: clothing guilt without a clear next step."
+            copy="Dreamstill began when founders kept hearing the same story — people wanted to do the right thing with clothing, but every pathway felt confusing, shameful, or out of reach."
+          />
+        </FadeIn>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {[
+            "Closets full of garments with no trusted guidance.",
+            "Donation streams overwhelmed by low-quality intake.",
+            "Cities and partners lacking behaviour-level textile infrastructure.",
+          ].map((item) => (
+            <div key={item} className="premium-card rounded-[2rem] p-5 text-sm leading-7 text-[#625e55]">
+              {item}
             </div>
-          </FadeIn>
-          <FadeIn delay={0.1}>
-            <div className="premium-card relative overflow-hidden rounded-[3rem] p-8 md:p-10">
-              <div className="absolute -right-12 -top-10 h-52 w-52 rounded-full bg-[#efd2c2]/70 blur-3xl" />
-              <div className="absolute -bottom-10 -left-10 h-52 w-52 rounded-full bg-[#8da18f]/40 blur-3xl" />
-              <div className="relative">
-                <p className="text-sm uppercase tracking-[0.28em] text-[#8a6d58]">Founder ethos</p>
-                <blockquote className="font-serif mt-6 text-4xl leading-[1.05] tracking-[-0.04em] text-[#20201d] md:text-5xl">
-                  “The future of fashion is not only what we make. It is how intelligently we care for what already exists.”
-                </blockquote>
-                <p className="mt-6 text-sm leading-7 text-[#625e55]">
-                  Dreamstill carries cultural, community, and climate roots into a technology company designed to feel warm,
-                  credible, and deeply useful.
-                </p>
-              </div>
-            </div>
-          </FadeIn>
+          ))}
         </div>
       </section>
 
-      <section className="container-shell py-16">
+      <section className="container-shell section-space">
         <FadeIn>
-          <div className="dark-card rounded-[3rem] p-8 md:p-12">
-            <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-              <div>
-                <p className="text-xs uppercase tracking-[0.32em] text-[#d9c6b2]">The problem</p>
-                <h2 className="font-serif mt-4 text-4xl leading-[1.02] tracking-[-0.045em] text-[#fffaf1] md:text-6xl">
-                  Fashion waste is not just material. It is emotional, local, and systemic.
-                </h2>
-                <p className="mt-5 text-base leading-8 text-[#efe5d8]/78 md:text-lg">
-                  People want to help but feel overwhelmed. Stores want better intake but face labour strain. Cities want
-                  diversion but lack behaviour-level infrastructure.
-                </p>
-              </div>
-              <div className="grid gap-4 sm:grid-cols-2">
-                {[
-                  "Closets are full of garments people do not know how to move responsibly.",
-                  "Donation streams are contaminated by items that should have gone elsewhere.",
-                  "Repair businesses need visibility inside modern consumer journeys.",
-                  "Municipal textile diversion needs better routing and better data.",
-                ].map((item) => (
-                  <div key={item} className="rounded-[2rem] border border-white/10 bg-white/5 p-5 text-sm leading-7 text-[#efe5d8]/78">
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <SectionHeader eyebrow="Our story" title="A timeline of learning, building, and scaling impact." />
         </FadeIn>
+        <div className="mt-8 grid gap-5">
+          {timeline.map((item, index) => (
+            <FadeIn key={item.season} delay={index * 0.04}>
+              <article className="premium-card rounded-[2.25rem] p-6 md:p-8">
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#8a6d58]">{item.season}</p>
+                <h3 className="page-subtitle mt-3 text-3xl md:text-4xl">{item.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-[#625e55]">{item.copy}</p>
+                <p className="mt-3 text-sm font-medium leading-7 text-[#4f4b44]">{item.outcome}</p>
+              </article>
+            </FadeIn>
+          ))}
+        </div>
       </section>
 
-      <section className="container-shell py-16">
+      <section className="container-shell section-space">
         <FadeIn>
-          <SectionHeader
-            eyebrow="Story"
-            title="From clothing guilt to circular intelligence."
-            copy="Dreamstill is designed for the emotional moment when someone wants to do better and the operational moment when a system needs a smarter route."
-          />
+          <SectionHeader eyebrow="Values" title="Creative rigor, community accountability, better endings for clothing." />
         </FadeIn>
-        <div className="mt-10 grid gap-5">
-          {timeline.map((item, index) => (
-            <FadeIn key={item.title} delay={index * 0.06}>
-              <div className="premium-card grid gap-5 rounded-[2.25rem] p-6 md:grid-cols-[0.22fr_0.78fr] md:p-8">
-                <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#8a6d58]">{item.year}</p>
-                <div>
-                  <h3 className="font-serif text-3xl leading-[1.05] tracking-[-0.035em] text-[#20201d] md:text-4xl">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-[#625e55]">{item.copy}</p>
-                </div>
+        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {values.map((value, index) => (
+            <FadeIn key={value.title} delay={index * 0.04}>
+              <div className="premium-card h-full rounded-[2rem] p-6">
+                <h3 className="font-serif text-2xl font-medium tracking-[-0.03em] text-[#20201d]">{value.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-[#625e55]">{value.copy}</p>
               </div>
             </FadeIn>
           ))}
         </div>
       </section>
 
-      <section className="container-shell py-16">
-        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+      <section className="container-shell section-space">
+        <FadeIn>
+          <SectionHeader
+            eyebrow="Founders"
+            title="Two founders building climate infrastructure with community heart."
+            copy="Founder-led climate technology with community roots in Vancouver and the Pacific Northwest."
+          />
+        </FadeIn>
+        <div className="mt-8 grid gap-6 lg:grid-cols-2">
+          {founders.map((founder, index) => (
+            <FadeIn key={founder.name} delay={index * 0.06}>
+              <article className="premium-card grid gap-6 rounded-[2.5rem] p-6 md:grid-cols-[0.34fr_0.66fr]">
+                <div className="relative min-h-56 overflow-hidden rounded-[2rem] bg-[#20201d]/5">
+                  <Image src={founder.image} alt={`Portrait of ${founder.name}`} fill className="object-cover" />
+                </div>
+                <div>
+                  <h3 className="page-subtitle text-3xl">{founder.name}</h3>
+                  {founder.paragraphs.map((paragraph) => (
+                    <p key={paragraph.slice(0, 24)} className="mt-4 text-sm leading-7 text-[#625e55]">
+                      {paragraph}
+                    </p>
+                  ))}
+                  <Link
+                    href={founder.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-5 inline-flex text-sm font-semibold text-[#56685b] underline underline-offset-4"
+                  >
+                    Connect on LinkedIn
+                  </Link>
+                </div>
+              </article>
+            </FadeIn>
+          ))}
+        </div>
+      </section>
+
+      <section className="container-shell section-space">
+        <div className="grid gap-8 lg:grid-cols-2">
           <FadeIn>
             <SectionHeader
-              eyebrow="Mission and ethos"
-              title="Keep clothing in use longer, with dignity and intelligence."
-              copy="We believe climate-conscious fashion systems should be culturally relevant, technically sophisticated, and easy for people to participate in."
+              eyebrow="Advisors & supporters"
+              title="Growing with research, community, and industry allies."
+              copy="Dreamstill collaborates with mentors and institutional supporters who strengthen product rigor and community trust."
             />
+            <ul className="mt-6 grid gap-3">
+              {advisors.map((item) => (
+                <li key={item} className="rounded-2xl bg-white/55 px-4 py-3 text-sm text-[#625e55]">
+                  {item}
+                </li>
+              ))}
+            </ul>
           </FadeIn>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {values.map((value, index) => (
-              <FadeIn key={value} delay={index * 0.05}>
-                <div className="premium-card rounded-[2rem] p-6">
-                  <p className="font-serif text-3xl leading-[1.06] tracking-[-0.035em] text-[#20201d]">{value}</p>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
+          <FadeIn delay={0.08}>
+            <div className="dark-card h-full rounded-[2.5rem] p-8">
+              <p className="text-xs uppercase tracking-[0.32em] text-[#d9c6b2]">Where we&apos;re headed</p>
+              <h2 className="page-subtitle mt-4 text-[#fffaf1]">Circular infrastructure for every clothing decision.</h2>
+              <p className="mt-5 text-sm leading-7 text-[#efe5d8]/78">
+                Dreamstill is building the connective layer between closets, repair culture, resale, donation systems,
+                municipalities, and recycling networks — with Sorty as the intelligence interface.
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <ButtonLink href="/sorty" variant="sage">
+                  Explore Sorty
+                </ButtonLink>
+                <ButtonLink href="/investors" variant="light">
+                  For investors
+                </ButtonLink>
+              </div>
+            </div>
+          </FadeIn>
         </div>
       </section>
     </div>

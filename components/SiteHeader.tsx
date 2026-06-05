@@ -3,14 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { SiteLogo } from "@/components/SiteLogo";
 
 const navItems = [
   { href: "/sorty", label: "Sorty" },
-  { href: "/businesses", label: "For Businesses" },
   { href: "/portfolio", label: "Experiences" },
+  { href: "/about", label: "About" },
   { href: "/impact", label: "Impact" },
   { href: "/community", label: "Community" },
-  { href: "/about", label: "About" },
+  { href: "/investors", label: "Investors" },
 ];
 
 export function SiteHeader() {
@@ -21,21 +22,11 @@ export function SiteHeader() {
     <header className="fixed left-0 right-0 top-0 z-50 px-4 py-4">
       <div className="container-shell">
         <nav className="premium-card flex items-center justify-between rounded-full px-4 py-3 md:px-5">
-          <Link href="/" className="group flex items-center gap-3" aria-label="Dreamstill home">
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-[#20201d] text-sm font-semibold text-[#fffaf1] shadow-lg shadow-[#20201d]/15 transition-transform duration-300 group-hover:scale-105">
-              D
-            </span>
-            <span className="flex flex-col leading-none">
-              <span className="text-sm font-semibold tracking-[0.22em] text-[#20201d]">DREAMSTILL</span>
-              <span className="mt-1 hidden text-[0.62rem] uppercase tracking-[0.32em] text-[#6e6a60] sm:block">
-                Circular intelligence
-              </span>
-            </span>
-          </Link>
+          <SiteLogo />
 
           <div className="hidden items-center gap-1 lg:flex">
             {navItems.map((item) => {
-              const active = pathname === item.href;
+              const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
               return (
                 <Link
                   key={item.href}
@@ -57,13 +48,13 @@ export function SiteHeader() {
               href="/contact"
               className="rounded-full border border-[#20201d]/10 bg-white/55 px-4 py-2 text-sm font-medium text-[#20201d] transition hover:-translate-y-0.5 hover:bg-white"
             >
-              Partner with us
+              Contact
             </Link>
             <Link
-              href="/sorty"
+              href="/portfolio#calendly"
               className="rounded-full bg-[#8da18f] px-4 py-2 text-sm font-semibold text-[#1e241f] shadow-lg shadow-[#8da18f]/30 transition hover:-translate-y-0.5 hover:bg-[#9fb09f]"
             >
-              Download Sorty
+              Book an experience
             </Link>
           </div>
 
@@ -92,11 +83,11 @@ export function SiteHeader() {
                 </Link>
               ))}
               <Link
-                href="/contact"
+                href="/portfolio#calendly"
                 className="mt-2 rounded-2xl bg-[#20201d] px-4 py-3 text-center text-sm font-semibold text-[#fffaf1]"
                 onClick={() => setOpen(false)}
               >
-                Start a partnership
+                Book an experience
               </Link>
             </div>
           </div>
