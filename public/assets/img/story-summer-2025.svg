@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Summer 2025 Events</title>
+  <desc id="desc">Illustration of DreamStill community events.</desc>
+  <rect width="640" height="360" rx="28" fill="#f3cf4f"/>
+  <circle cx="180" cy="143" r="52" fill="#f7b6cf" stroke="#17342a" stroke-width="7"/>
+  <circle cx="320" cy="120" r="52" fill="#a8d8e8" stroke="#17342a" stroke-width="7"/>
+  <circle cx="460" cy="143" r="52" fill="#d7ef70" stroke="#17342a" stroke-width="7"/>
+  <path d="M95 284c28-66 75-97 122-97s94 31 122 97M300 284c28-66 75-97 122-97s94 31 122 97" fill="none" stroke="#17342a" stroke-width="11" stroke-linecap="round"/>
+  <text x="235" y="329" fill="#17342a" font-family="Arial, sans-serif" font-size="34" font-weight="900">Events</text>
+</svg>

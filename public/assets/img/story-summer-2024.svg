@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Summer 2024 Clothing swaps</title>
+  <desc id="desc">Illustration of clothing racks and community styling.</desc>
+  <rect width="640" height="360" rx="28" fill="#f7b6cf"/>
+  <path d="M124 255V112h392v143" fill="none" stroke="#17342a" stroke-width="10" stroke-linecap="round"/>
+  <path d="M190 114c0 57-25 96-58 123h116c-35-28-58-66-58-123Z" fill="#a8d8e8" stroke="#17342a" stroke-width="7"/>
+  <path d="M320 114c0 56-24 96-58 123h116c-35-28-58-67-58-123Z" fill="#d7ef70" stroke="#17342a" stroke-width="7"/>
+  <path d="M450 114c0 56-24 96-58 123h116c-35-28-58-67-58-123Z" fill="#ff664f" stroke="#17342a" stroke-width="7"/>
+  <text x="91" y="318" fill="#17342a" font-family="Arial, sans-serif" font-size="32" font-weight="900">Clothing swaps</text>
+</svg>

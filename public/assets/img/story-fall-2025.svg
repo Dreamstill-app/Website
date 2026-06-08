@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Fall 2025 Industry partnerships</title>
+  <desc id="desc">Illustration of partners connecting around circular textiles.</desc>
+  <rect width="640" height="360" rx="28" fill="#064d3b"/>
+  <rect x="81" y="104" width="138" height="118" rx="24" fill="#fff9ed" stroke="#17342a" stroke-width="7"/>
+  <rect x="251" y="70" width="138" height="118" rx="24" fill="#d7ef70" stroke="#17342a" stroke-width="7"/>
+  <rect x="421" y="104" width="138" height="118" rx="24" fill="#f7b6cf" stroke="#17342a" stroke-width="7"/>
+  <path d="M219 164h32M389 130l32 34" stroke="#fff9ed" stroke-width="10" stroke-linecap="round"/>
+  <text x="103" y="316" fill="#fff9ed" font-family="Arial, sans-serif" font-size="32" font-weight="900">Industry partnerships</text>
+</svg>

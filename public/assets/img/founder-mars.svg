@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-labelledby="title desc">
+  <title id="title">Mars founder portrait illustration</title>
+  <desc id="desc">A warm illustrated portrait placeholder for Mars.</desc>
+  <rect width="360" height="360" rx="42" fill="#a8d8e8"/>
+  <path d="M106 161c-9-69 25-112 75-112s89 44 77 113c-8 44-38 85-76 85s-70-39-76-86Z" fill="#2a211d" stroke="#17342a" stroke-width="8"/>
+  <circle cx="180" cy="159" r="62" fill="#c98263" stroke="#17342a" stroke-width="6"/>
+  <path d="M128 127c28-58 95-62 121 2-41-2-84-7-121-2Z" fill="#2a211d"/>
+  <circle cx="158" cy="163" r="6" fill="#17342a"/>
+  <circle cx="202" cy="163" r="6" fill="#17342a"/>
+  <path d="M162 191c15 13 32 13 48 0" fill="none" stroke="#17342a" stroke-width="6" stroke-linecap="round"/>
+  <path d="M76 318c14-74 60-109 105-109s89 35 103 109" fill="#ff664f" stroke="#17342a" stroke-width="8"/>
+  <path d="M132 255c20 15 80 15 100 0" stroke="#17342a" stroke-width="8" stroke-linecap="round"/>
+  <path d="M75 87c46-23 79-14 103 28" fill="none" stroke="#d7ef70" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="278" cy="83" r="23" fill="#f3cf4f" stroke="#17342a" stroke-width="5"/>
+</svg>

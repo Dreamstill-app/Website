@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-labelledby="title desc">
+  <title id="title">Khushi founder portrait illustration</title>
+  <desc id="desc">A warm illustrated portrait placeholder for Khushi.</desc>
+  <rect width="360" height="360" rx="42" fill="#f7b6cf"/>
+  <circle cx="180" cy="145" r="74" fill="#8b5138" stroke="#17342a" stroke-width="8"/>
+  <circle cx="180" cy="164" r="61" fill="#f2b99d" stroke="#17342a" stroke-width="6"/>
+  <path d="M119 138c14-53 96-77 137-16-38 2-88-8-137 16Z" fill="#17342a"/>
+  <circle cx="160" cy="166" r="6" fill="#17342a"/>
+  <circle cx="202" cy="166" r="6" fill="#17342a"/>
+  <path d="M162 193c16 12 31 12 47 0" fill="none" stroke="#17342a" stroke-width="6" stroke-linecap="round"/>
+  <path d="M80 316c13-73 57-105 100-105s87 32 100 105" fill="#d7ef70" stroke="#17342a" stroke-width="8"/>
+  <path d="M130 250h100" stroke="#17342a" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="78" cy="86" r="22" fill="#f3cf4f" stroke="#17342a" stroke-width="5"/>
+  <path d="M274 72c30 30 30 67 0 97" fill="none" stroke="#064d3b" stroke-width="12" stroke-linecap="round"/>
+</svg>

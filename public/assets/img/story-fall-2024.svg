@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Fall 2024 Buildspace</title>
+  <desc id="desc">Illustration of startup building blocks and ideas.</desc>
+  <rect width="640" height="360" rx="28" fill="#a8d8e8"/>
+  <rect x="92" y="97" width="126" height="126" rx="24" fill="#ff664f" stroke="#17342a" stroke-width="7"/>
+  <rect x="256" y="60" width="126" height="126" rx="24" fill="#d7ef70" stroke="#17342a" stroke-width="7"/>
+  <rect x="421" y="129" width="126" height="126" rx="24" fill="#fff9ed" stroke="#17342a" stroke-width="7"/>
+  <path d="M218 160h38M382 123l39 45" stroke="#17342a" stroke-width="10" stroke-linecap="round"/>
+  <text x="137" y="318" fill="#17342a" font-family="Arial, sans-serif" font-size="34" font-weight="900">Buildspace</text>
+</svg>
