@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Sorty is DreamStill's computer vision mobile app for finding the next best use for unwanted clothing.">
     <title>Sorty App | DreamStill Technologies</title>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Sorty — AI-Powered Textile Sorting App">
+    <meta property="og:description" content="Scan garments, get pathway recommendations, and find local circular options in just a few taps.">
+    <meta property="og:url" content="https://dreamstill.ca/app.html">
+    <meta property="og:image" content="https://dreamstill.ca/assets/img/app-preview.svg">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <script defer data-domain="dreamstill.ca" src="https://plausible.io/js/script.js"></script>
   </head>
   <body>
     <div class="top-ribbon">Clean technology for textile circularity • Vancouver, BC • Sort better, waste less</div>
@@ -19,8 +26,7 @@
           <a href="index.html">Home</a>
           <a href="about.html">About</a>
           <a class="active" href="app.html">App</a>
-          <a href="portfolio.html">Portfolio</a>
-          <a href="contact.html">Contact Us</a>
+          <a href="portfolio.html">Experiences</a>
         </nav>
         <a class="button coral" href="contact.html">Let's talk</a>
       </div>
@@ -30,12 +36,13 @@
       <section class="site-shell page-hero">
         <div class="page-hero-card">
           <div>
+            <span class="status-badge">Currently in beta — launching soon</span>
             <span class="eyebrow">The app</span>
             <h1>Meet Sorty, the next-best-use tool for unwanted clothing.</h1>
-            <p>Sorty is a computer vision mobile application that helps users determine the next best use for unwanted clothing in under one second.</p>
+            <p>Sorty is a computer vision mobile application that helps users determine the next best use for unwanted clothing in just a few taps.</p>
             <div class="hero-actions">
-              <a class="button lime" href="#sorty-demo">Watch demonstration</a>
-              <a class="button light" href="contact.html">Pilot with us</a>
+              <a class="button lime" href="#waitlist">Notify me at launch</a>
+              <a class="button light" href="contact.html?interest=pilot">Request a pilot</a>
             </div>
           </div>
           <div class="hero-badge">scan • answer • route • rescue</div>
@@ -72,31 +79,27 @@
         </div>
       </section>
 
-      <section class="site-shell section" id="sorty-demo">
-        <div class="section-heading">
-          <h2>Watch a demonstration</h2>
-          <p>An embedded demo area is ready for the final Sorty video link, with the app walkthrough framed for visitors and pilot partners.</p>
-        </div>
-        <div class="video-embed">
-          <iframe
-            title="Sorty app demonstration"
-            srcdoc="<style>body{margin:0;display:grid;place-items:center;height:100vh;background:#17342a;color:#fff9ed;font-family:Arial,sans-serif;text-align:center}.wrap{max-width:720px;padding:2rem}.badge{display:inline-block;background:#d7ef70;color:#17342a;border-radius:999px;padding:.55rem 1rem;font-weight:900;text-transform:uppercase}h1{font-size:clamp(2rem,8vw,4.5rem);line-height:.9;letter-spacing:-.06em}p{font-size:1.05rem;color:rgba(255,249,237,.82)}</style><div class='wrap'><span class='badge'>Sorty Demo</span><h1>Video embed ready</h1><p>Add the final demonstration URL here to show the garment scan, instant pathway recommendation, and nearby map locations.</p></div>">
-          </iframe>
-        </div>
-      </section>
-
       <section class="site-shell section">
         <div class="grid two">
           <article class="card">
             <span class="eyebrow">Why it exists</span>
             <h3>Textile waste is one of the fastest-growing waste streams globally.</h3>
             <p>Most people do not know what to do with unwanted clothing, and even when clothing is donated, systems are overwhelmed. It is estimated that up to 70% of donated garments are never resold, leading to export, downcycling, or disposal.</p>
+            <p class="source-link">Source: <a href="https://www.epa.gov/facts-and-figures-about-materials-waste-and-recycling/textiles-material-specific-data" target="_blank" rel="noopener noreferrer">U.S. EPA Textiles Material-Specific Data</a>; corroborated by secondary market research on donation channel overflow.</p>
           </article>
           <article class="card">
             <span class="eyebrow">The gap</span>
             <h3>Municipalities need tools that help residents make informed disposal decisions.</h3>
             <p>Sorty was created to close this gap by providing a simple digital tool that helps individuals determine the next best use for their garments, prioritizing reuse, repair, resale, and recycling.</p>
           </article>
+        </div>
+      </section>
+
+      <section class="site-shell section">
+        <div class="tech-credibility">
+          <span class="eyebrow" style="color: var(--lime);">Technical approach</span>
+          <h2>Computer vision meets circular infrastructure.</h2>
+          <p>Sorty combines on-device garment classification using computer vision with a condition-assessment questionnaire to generate pathway recommendations. Our AI model is trained on textile categories relevant to North American waste streams, and recommendations are mapped to verified local circular infrastructure — repair shops, consignment stores, donation centres, and textile recyclers. This hybrid approach (AI + structured questions + geospatial data) delivers higher accuracy than a simple lookup database and provides municipalities with anonymized diversion analytics.</p>
         </div>
       </section>
 
@@ -121,14 +124,79 @@
         </div>
       </section>
 
+      <section class="site-shell section">
+        <div class="audience-section">
+          <span class="eyebrow">For municipalities &amp; government</span>
+          <h2>Procurement-ready climate technology for textile diversion.</h2>
+          <p>Sorty integrates with existing waste management programs and provides measurable outcomes for municipal textile diversion strategies.</p>
+          <ul class="feature-list">
+            <li>Anonymized diversion data and reporting dashboards</li>
+            <li>Integration with existing waste program communications</li>
+            <li>Local circular infrastructure mapping and maintenance</li>
+            <li>Flexible pilot terms — 3, 6, or 12-month deployments</li>
+            <li>Multi-language support for diverse communities</li>
+          </ul>
+          <div class="hero-actions" style="margin-top: 1.5rem;">
+            <a class="button coral" href="contact.html?interest=pilot">Request a pilot</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="site-shell section">
+        <div class="audience-section" style="background: var(--mint);">
+          <span class="eyebrow">For investors &amp; grant bodies</span>
+          <h2>Scalable climate technology with measurable impact.</h2>
+          <p>Sorty addresses a $500B+ global textile waste problem with a B2G and B2B SaaS model. Every scan generates diversion data that municipalities and brands need — creating a defensible data moat in circular infrastructure.</p>
+          <ul class="feature-list">
+            <li>4,000+ garments diverted through community programs to date</li>
+            <li>Computer vision + geospatial AI — not a simple database</li>
+            <li>Dual revenue: municipal pilots + corporate licensing</li>
+            <li>Aligned with federal and provincial circular economy mandates</li>
+          </ul>
+          <div class="hero-actions" style="margin-top: 1.5rem;">
+            <a class="button" href="investors.html">View investor information</a>
+            <a class="button light" href="contact.html?interest=investment">Schedule a call</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="site-shell section tight">
+        <div class="section-heading">
+          <h2>Pilot partners &amp; collaborators</h2>
+          <p>Organizations working with DreamStill to test and refine Sorty.</p>
+        </div>
+        <div class="pilot-partners">
+          <span class="pilot-partner-tag">UBC Slow Fibre Research Cluster</span>
+          <span class="pilot-partner-tag">Ecorise</span>
+          <span class="pilot-partner-tag">Slow Fashion Season</span>
+          <span class="pilot-partner-tag">Your organization here</span>
+        </div>
+      </section>
+
+      <section class="site-shell section" id="waitlist">
+        <div class="newsletter-card">
+          <div>
+            <span class="eyebrow" style="color: var(--lime);">Launch waitlist</span>
+            <h2>Be first to try Sorty</h2>
+            <p>Sorty is in beta and launching soon. Join the waitlist to get notified when the app is available in your area.</p>
+          </div>
+          <form class="newsletter-form" data-waitlist-form>
+            <label class="sr-only" for="waitlist-email">Email address</label>
+            <input id="waitlist-email" name="email" type="email" placeholder="your@email.com" autocomplete="email" required>
+            <button class="button lime" type="submit">Notify me at launch</button>
+          </form>
+        </div>
+      </section>
+
       <section class="site-shell section tight">
         <div class="contact-layout">
           <div class="card contact-card">
-            <h2>Interested in Sorty?</h2>
-            <p>Contact DreamStill to discuss pilots, partnerships, circular infrastructure mapping, or textile waste education.</p>
+            <h2>Request a pilot</h2>
+            <p>Pilots are our primary path for municipalities, institutions, and research partners. Tell us about your textile diversion goals and we'll design a pilot program.</p>
           </div>
           <div class="card">
-            <a class="button coral" href="contact.html">Contact Us</a>
+            <a class="button coral" href="contact.html?interest=pilot">Request a pilot</a>
+            <p class="form-note">Or email us directly at <a href="mailto:info@dreamstill.ca">info@dreamstill.ca</a></p>
           </div>
         </div>
       </section>
@@ -136,6 +204,10 @@
 
     <footer class="site-footer">
       <div class="site-shell">
+        <div class="footer-cta">
+          <p>Ready to work together? Get in touch.</p>
+          <a class="button lime" href="contact.html">Contact DreamStill</a>
+        </div>
         <div class="footer-grid">
           <div>
             <h2>Land Acknowledgement</h2>
@@ -147,23 +219,28 @@
               <a href="index.html">Home</a>
               <a href="about.html">About</a>
               <a href="app.html">App</a>
-              <a href="portfolio.html">Portfolio</a>
-              <a href="contact.html">Contact Us</a>
+              <a href="portfolio.html">Experiences</a>
+              <a href="contact.html">Contact</a>
+              <a href="investors.html">Investors</a>
             </nav>
           </div>
           <div>
             <h3>Socials</h3>
             <nav class="footer-links" aria-label="Social links">
-              <a href="https://www.instagram.com/dreamstilll" target="_blank" rel="noreferrer">Instagram</a>
-              <a href="https://ca.linkedin.com/company/dreamstilll" target="_blank" rel="noreferrer">LinkedIn</a>
-              <a href="https://chat.whatsapp.com/KcDCExBU7fj6HTG8Xhsups" target="_blank" rel="noreferrer">Whatsapp group chat</a>
-              <a href="https://www.facebook.com/people/DreamStill/61558387175265/" target="_blank" rel="noreferrer">Facebook</a>
+              <a href="https://www.instagram.com/dreamstilll" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://ca.linkedin.com/company/dreamstilll" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://www.facebook.com/people/DreamStill/61558387175265/" target="_blank" rel="noopener noreferrer">Facebook</a>
             </nav>
           </div>
         </div>
         <div class="footer-bottom">© 2026 DreamStill Technologies. Circular textile tools for a zero-waste future.</div>
       </div>
     </footer>
+
+    <div class="mobile-cta-bar" aria-label="Quick actions">
+      <a class="button coral" href="contact.html?interest=pilot">Request a pilot</a>
+      <a class="button" href="#waitlist">Join waitlist</a>
+    </div>
     <script src="assets/js/main.js"></script>
   </body>
 </html>
