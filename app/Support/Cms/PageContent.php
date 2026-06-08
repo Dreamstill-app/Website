@@ -87,25 +87,63 @@ class PageContent
             'is_homepage' => $isHomepage,
             'meta_title' => $metaTitle,
             'meta_description' => $metaDescription,
-            'sections' => [
-                [
-                    'name' => 'Page body',
-                    'type' => 'raw_blade',
-                    'sort_order' => 10,
-                    'data' => [
-                        'markup' => self::loadMarkup($slug),
-                    ],
-                ],
-            ],
+            'sections' => self::loadSections($slug),
         ];
     }
 
-    protected static function loadMarkup(string $slug): string
+    protected static function loadSections(string $slug): array
     {
         $path = base_path("cms_page_sources/{$slug}.blade.raw");
 
-        return File::exists($path)
-            ? File::get($path)
-            : '';
+        if (! File::exists($path)) {
+            return [];
+        }
+
+        $markup = trim(File::get($path));
+
+        if ($markup === '') {
+            return [];
+        }
+
+        preg_match_all('/<section\b.*?<\/section>/si', $markup, $matches);
+
+        $sections = $matches[0] ?? [];
+
+        if ($sections === []) {
+            $sections = [$markup];
+        }
+
+        return collect($sections)
+            ->values()
+            ->map(fn (string $section, int $index): array => [
+                'name' => self::inferSectionName($section, $index + 1),
+                'type' => 'raw_blade',
+                'sort_order' => ($index + 1) * 10,
+                'data' => [
+                    'markup' => trim($section),
+                ],
+            ])
+            ->all();
+    }
+
+    protected static function inferSectionName(string $markup, int $position): string
+    {
+        if (preg_match('/<h[1-3][^>]*>(.*?)<\/h[1-3]>/si', $markup, $matches)) {
+            $heading = trim(strip_tags(html_entity_decode($matches[1], ENT_QUOTES | ENT_HTML5)));
+
+            if ($heading !== '') {
+                return $heading;
+            }
+        }
+
+        if (preg_match('/<span[^>]*class="[^"]*eyebrow[^"]*"[^>]*>(.*?)<\/span>/si', $markup, $matches)) {
+            $eyebrow = trim(strip_tags(html_entity_decode($matches[1], ENT_QUOTES | ENT_HTML5)));
+
+            if ($eyebrow !== '') {
+                return $eyebrow;
+            }
+        }
+
+        return "Section {$position}";
     }
 }
