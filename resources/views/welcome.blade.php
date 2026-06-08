@@ -101,23 +101,5 @@
             </div>
         </section>
 
-        <section class="site-shell section">
-            <div class="section-heading">
-                <h2>CMS migration in progress</h2>
-                <p>This public homepage is now running inside Laravel. Next, the remaining pages will move into database-driven templates and editable admin sections.</p>
-            </div>
-            <div class="grid two">
-                <article class="card solution-card">
-                    <span class="eyebrow">Admin foundation</span>
-                    <h3>Laravel + Filament + Breeze</h3>
-                    <p>Email/password auth and the admin panel foundation are installed so DreamStill can move from static editing to a browser-based CMS workflow.</p>
-                </article>
-                <article class="card solution-card">
-                    <span class="eyebrow">Next phase</span>
-                    <h3>Database-driven pages</h3>
-                    <p>Page records, reusable sections, settings, and APIs are the next layer so the website and future Flutter app can share one backend.</p>
-                </article>
-            </div>
-        </section>
     </main>
 </x-site-layout>
