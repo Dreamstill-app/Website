@@ -1,0 +1,167 @@
+<div class="top-ribbon">Clean technology for textile circularity • Vancouver, BC • Sort better, waste less</div>
+    <header class="site-header">
+      <div class="site-shell nav-card">
+        <a class="brand" href="{{ url('/') }}" aria-label="DreamStill home">
+          <img src="{{ asset('assets/img/logo.svg') }}" alt="DreamStill Technologies">
+        </a>
+        <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-navigation">Menu</button>
+        <nav class="nav-links" id="main-navigation" data-nav-links aria-label="Main menu">
+          <a href="{{ url('/') }}">Home</a>
+          <a href="{{ url('/about') }}">About</a>
+          <a href="{{ url('/app') }}">App</a>
+          <a href="{{ url('/portfolio') }}">Experiences</a>
+        </nav>
+        <a class="button coral" href="{{ url('/contact') }}">Let's talk</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="site-shell page-hero" data-reveal="hero-left">
+        <div class="investor-hero" data-reveal="up">
+          <span class="eyebrow" style="color: var(--lime);">For investors &amp; funders</span>
+          <h1>Scalable climate technology for textile circularity.</h1>
+          <p>DreamStill is building the decision-support infrastructure for a zero-waste textile future — combining AI-powered sorting (Sorty) with community engagement and municipal partnerships.</p>
+        </div>
+      </section>
+
+      <section class="site-shell section" data-reveal="up">
+        <div class="grid three" data-reveal-group>
+          <article class="card stat-card" data-reveal-item>
+            <span class="stat-number">1.3M</span>
+            <p>tonnes of textiles purchased in Canada every year</p>
+          </article>
+          <article class="card stat-card" data-reveal-item>
+            <span class="stat-number">4,000+</span>
+            <p>garments diverted through DreamStill programs</p>
+          </article>
+          <article class="card stat-card" data-reveal-item>
+            <span class="stat-number">40+</span>
+            <p>community events hosted to date</p>
+          </article>
+        </div>
+        <p class="source-note">Market data sourced from the National Waste Characterization Report (Environment and Climate Change Canada, 2016) and the Preferred Fiber &amp; Materials Market Report (Textile Exchange, 2021).</p>
+      </section>
+
+      <section class="site-shell section" data-reveal="up">
+        <div class="grid two" data-reveal-group>
+          <article class="card" data-reveal-item>
+            <span class="eyebrow">The opportunity</span>
+            <h3>A $500B+ global problem with no dominant solution.</h3>
+            <p>Textile waste is one of the fastest-growing waste streams globally. Municipalities spend millions on disposal while residents lack clear guidance. Sorty fills this gap with AI-powered decision support mapped to local circular infrastructure.</p>
+          </article>
+          <article class="card" data-reveal-item>
+            <span class="eyebrow">Business model</span>
+            <h3>Dual revenue: B2G pilots + B2B licensing.</h3>
+            <p>Municipal pilot contracts provide recurring SaaS revenue and diversion data. Corporate experiences and brand licensing create additional revenue streams. Community events build brand trust and generate proprietary training data.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="site-shell section" data-reveal="up">
+        <div class="tech-credibility" data-reveal="up">
+          <span class="eyebrow" style="color: var(--lime);">Technology</span>
+          <h2>Computer vision + geospatial AI — not a simple database.</h2>
+          <p>Sorty combines on-device garment classification, condition assessment questionnaires, and geospatial mapping of circular infrastructure. This hybrid approach delivers higher accuracy than lookup tools and generates anonymized diversion analytics that municipalities and grant bodies require.</p>
+        </div>
+      </section>
+
+      <section class="site-shell section" data-reveal="up">
+        <div class="section-heading" data-reveal="up">
+          <h2>Traction &amp; recognition</h2>
+        </div>
+        <div class="press-grid" data-reveal-group>
+          <article class="press-card" data-reveal-item>
+            <span class="eyebrow">Media</span>
+            <h3>The National Observer</h3>
+            <p>Featured opinion on clothing waste, AI, and circular fashion.</p>
+            <a href="https://www.nationalobserver.com/2024/09/19/opinion/clothing-fashion-waste-AI" target="_blank" rel="noopener noreferrer">Read the article →</a>
+          </article>
+          <article class="press-card" data-reveal-item>
+            <span class="eyebrow">Events</span>
+            <h3>Kelowna Fashion Weekend</h3>
+            <p>Industry appearance connecting circular fashion innovation with regional design communities.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="site-shell section" data-reveal="up">
+        <div class="section-heading" data-reveal="up">
+          <h2>Backed by</h2>
+        </div>
+        <div class="logo-strip" data-reveal-group aria-label="Backing organizations">
+          <div class="backed-logo" data-reveal-item>
+            <span class="logo-text">Buildspace</span>
+          </div>
+          <div class="backed-logo" data-reveal-item>
+            <span class="logo-text">UBC Slow Fibre Research Cluster</span>
+          </div>
+          <div class="backed-logo" data-reveal-item>
+            <span class="logo-text">Your logo here</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="site-shell section" data-reveal="up">
+        <div class="download-card" data-reveal="up">
+          <div>
+            <h3>Request our one-pager or pitch deck</h3>
+            <p>Get the full overview of our market, model, traction, and funding ask.</p>
+          </div>
+          <a class="button coral" href="{{ url('/contact?interest=investment') }}">Request materials</a>
+        </div>
+      </section>
+
+      <section class="site-shell section tight" data-reveal="up">
+        <div class="contact-layout" data-reveal="up">
+          <div class="card contact-card">
+            <h2>Schedule an investor call</h2>
+            <p>We'd love to walk you through Sorty, our traction, and how DreamStill fits into the circular economy landscape.</p>
+            <a class="button" href="https://calendly.com/dreamstill/discovery-call" target="_blank" rel="noopener noreferrer">Book on Calendly</a>
+          </div>
+          <div class="card">
+            <p>Or email us at <a href="mailto:info@dreamstill.ca">info@dreamstill.ca</a></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-shell">
+        <div class="footer-cta">
+          <p>Ready to work together? Get in touch.</p>
+          <a class="button lime attention-gentle" href="{{ url('/contact') }}">Contact DreamStill</a>
+        </div>
+        <div class="footer-grid">
+          <div>
+            <h2>Land Acknowledgement</h2>
+            <p>DreamStill operates in Vancouver, BC, on the traditional, ancestral, and unceded territories of the Musqueam, Squamish, and Tsleil-Waututh Nations. We acknowledge the responsibilities that come with building climate solutions on these lands.</p>
+          </div>
+          <div>
+            <h3>Main Menu</h3>
+            <nav class="footer-links" aria-label="Footer main menu">
+              <a href="{{ url('/') }}">Home</a>
+              <a href="{{ url('/about') }}">About</a>
+              <a href="{{ url('/app') }}">App</a>
+              <a href="{{ url('/portfolio') }}">Experiences</a>
+              <a href="{{ url('/contact') }}">Contact</a>
+              <a href="{{ url('/investors') }}">Investors</a>
+            </nav>
+          </div>
+          <div>
+            <h3>Socials</h3>
+            <nav class="footer-links" aria-label="Social links">
+              <a href="https://www.instagram.com/dreamstilll" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://ca.linkedin.com/company/dreamstilll" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://www.facebook.com/people/DreamStill/61558387175265/" target="_blank" rel="noopener noreferrer">Facebook</a>
+            </nav>
+          </div>
+        </div>
+        <div class="footer-bottom">© 2026 DreamStill Technologies. Circular textile tools for a zero-waste future.</div>
+      </div>
+    </footer>
+
+    <div class="mobile-cta-bar" data-reveal="up" aria-label="Quick actions">
+      <a class="button coral" href="{{ url('/contact?interest=investment') }}">Investor inquiry</a>
+      <a class="button" href="{{ url('/contact') }}">Get in touch</a>
+    </div>
+    <script src="{{ asset('assets/js/main.js') }}"></script>

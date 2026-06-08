@@ -37,4 +37,14 @@ class Page extends Model
     {
         return $this->hasMany(PageSection::class)->orderBy('sort_order');
     }
+
+    public function scopePublished($query)
+    {
+        return $query->where('status', 'published');
+    }
+
+    public function getRoutePathAttribute(): string
+    {
+        return $this->is_homepage ? '/' : '/'.$this->slug;
+    }
 }

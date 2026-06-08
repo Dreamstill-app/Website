@@ -1,0 +1,227 @@
+<div class="top-ribbon">Clean technology for textile circularity • Vancouver, BC • Sort better, waste less</div>
+    <header class="site-header">
+      <div class="site-shell nav-card">
+        <a class="brand" href="{{ url('/') }}" aria-label="DreamStill home">
+          <img src="{{ asset('assets/img/logo.svg') }}" alt="DreamStill Technologies">
+        </a>
+        <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-navigation">Menu</button>
+        <nav class="nav-links" id="main-navigation" data-nav-links aria-label="Main menu">
+          <a href="{{ url('/') }}">Home</a>
+          <a href="{{ url('/about') }}">About</a>
+          <a class="active" href="{{ url('/app') }}">App</a>
+          <a href="{{ url('/portfolio') }}">Experiences</a>
+        </nav>
+        <a class="button coral" href="{{ url('/contact') }}">Let's talk</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="site-shell page-hero" data-reveal="hero-left">
+        <div class="page-hero-card" data-reveal="up">
+          <div>
+            <span class="status-badge">Currently in beta — launching soon</span>
+            <span class="eyebrow">The app</span>
+            <h1>Meet Sorty, the next-best-use tool for unwanted clothing.</h1>
+            <p>Sorty is a computer vision mobile application that helps users determine the next best use for unwanted clothing in just a few taps.</p>
+            <div class="hero-actions" data-reveal="up">
+              <a class="button lime" href="#waitlist">Notify me at launch</a>
+              <a class="button light" href="{{ url('/contact?interest=pilot') }}">Request a pilot</a>
+            </div>
+          </div>
+          <div class="hero-badge" data-reveal="accent">scan • answer • route • rescue</div>
+        </div>
+      </section>
+
+      <section class="site-shell section" data-reveal="up">
+        <div class="app-showcase">
+          <img src="{{ asset('assets/img/app-preview.svg') }}" alt="Sorty app preview showing scan and repair recommendation">
+          <div>
+            <span class="eyebrow">How it works</span>
+            <h2 class="headline" style="font-size: clamp(2.8rem, 7vw, 5.8rem);">Simple decisions for circular textiles.</h2>
+            <div class="steps">
+              <div class="step">
+                <div>
+                  <h3>Take a photo</h3>
+                  <p>Users take a photo of a garment and answer a short set of questions about its condition.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div>
+                  <h3>Get a recommendation</h3>
+                  <p>The app analyzes the item and recommends the most appropriate pathway, such as resale, consignment, repair, donation, or recycling.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div>
+                  <h3>Find a nearby place</h3>
+                  <p>Sorty displays a map of nearby locations where the item can be taken, helping garments stay in use longer.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="site-shell section" data-reveal="up">
+        <div class="grid two" data-reveal-group>
+          <article class="card" data-reveal-item>
+            <span class="eyebrow">Why it exists</span>
+            <h3>Textile waste is one of the fastest-growing waste streams globally.</h3>
+            <p>Most people do not know what to do with unwanted clothing, and even when clothing is donated, systems are overwhelmed. It is estimated that up to 70% of donated garments are never resold, leading to export, downcycling, or disposal.</p>
+            <p class="source-link">Source: <a href="https://www.epa.gov/facts-and-figures-about-materials-waste-and-recycling/textiles-material-specific-data" target="_blank" rel="noopener noreferrer">U.S. EPA Textiles Material-Specific Data</a>; corroborated by secondary market research on donation channel overflow.</p>
+          </article>
+          <article class="card" data-reveal-item>
+            <span class="eyebrow">The gap</span>
+            <h3>Municipalities need tools that help residents make informed disposal decisions.</h3>
+            <p>Sorty was created to close this gap by providing a simple digital tool that helps individuals determine the next best use for their garments, prioritizing reuse, repair, resale, and recycling.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="site-shell section" data-reveal="up">
+        <div class="tech-credibility" data-reveal="up">
+          <span class="eyebrow" style="color: var(--lime);">Technical approach</span>
+          <h2>Computer vision meets circular infrastructure.</h2>
+          <p>Sorty combines on-device garment classification using computer vision with a condition-assessment questionnaire to generate pathway recommendations. Our AI model is trained on textile categories relevant to North American waste streams, and recommendations are mapped to verified local circular infrastructure — repair shops, consignment stores, donation centres, and textile recyclers. This hybrid approach (AI + structured questions + geospatial data) delivers higher accuracy than a simple lookup database and provides municipalities with anonymized diversion analytics.</p>
+        </div>
+      </section>
+
+      <section class="site-shell section" data-reveal="up">
+        <div class="section-heading" data-reveal="up">
+          <h2>Decision support for textile circularity</h2>
+          <p>Sorty is designed for people getting rid of one shirt and for systems trying to divert thousands of pounds of textile waste.</p>
+        </div>
+        <div class="grid three" data-reveal-group>
+          <article class="card value-card" data-reveal-item>
+            <h3>For residents</h3>
+            <p>Understand whether an item is best suited for resale, repair, donation, consignment, or recycling.</p>
+          </article>
+          <article class="card value-card" data-reveal-item>
+            <h3>For cities</h3>
+            <p>Guide community members toward existing local infrastructure and reduce confusion at the point of disposal.</p>
+          </article>
+          <article class="card value-card" data-reveal-item>
+            <h3>For industry</h3>
+            <p>Build better data and better pathways for textiles moving through reuse and recovery ecosystems.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="site-shell section" data-reveal="up">
+        <div class="audience-section" data-reveal="up">
+          <span class="eyebrow">For municipalities &amp; government</span>
+          <h2>Procurement-ready climate technology for textile diversion.</h2>
+          <p>Sorty integrates with existing waste management programs and provides measurable outcomes for municipal textile diversion strategies.</p>
+          <ul class="feature-list">
+            <li>Anonymized diversion data and reporting dashboards</li>
+            <li>Integration with existing waste program communications</li>
+            <li>Local circular infrastructure mapping and maintenance</li>
+            <li>Flexible pilot terms — 3, 6, or 12-month deployments</li>
+            <li>Multi-language support for diverse communities</li>
+          </ul>
+          <div class="hero-actions" style="margin-top: 1.5rem;">
+            <a class="button coral" href="{{ url('/contact?interest=pilot') }}">Request a pilot</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="site-shell section" data-reveal="up">
+        <div class="audience-section" style="background: var(--mint);" data-reveal="up">
+          <span class="eyebrow">For investors &amp; grant bodies</span>
+          <h2>Scalable climate technology with measurable impact.</h2>
+          <p>Sorty addresses a $500B+ global textile waste problem with a B2G and B2B SaaS model. Every scan generates diversion data that municipalities and brands need — creating a defensible data moat in circular infrastructure.</p>
+          <ul class="feature-list">
+            <li>4,000+ garments diverted through community programs to date</li>
+            <li>Computer vision + geospatial AI — not a simple database</li>
+            <li>Dual revenue: municipal pilots + corporate licensing</li>
+            <li>Aligned with federal and provincial circular economy mandates</li>
+          </ul>
+          <div class="hero-actions" style="margin-top: 1.5rem;">
+            <a class="button" href="{{ url('/investors') }}">View investor information</a>
+            <a class="button light" href="{{ url('/contact?interest=investment') }}">Schedule a call</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="site-shell section tight" data-reveal="up">
+        <div class="section-heading" data-reveal="up">
+          <h2>Pilot partners &amp; collaborators</h2>
+          <p>Organizations working with DreamStill to test and refine Sorty.</p>
+        </div>
+        <div class="pilot-partners" data-reveal-group>
+          <span class="pilot-partner-tag" data-reveal-item>UBC Slow Fibre Research Cluster</span>
+          <span class="pilot-partner-tag" data-reveal-item>Ecorise</span>
+          <span class="pilot-partner-tag" data-reveal-item>Slow Fashion Season</span>
+          <span class="pilot-partner-tag" data-reveal-item>Your organization here</span>
+        </div>
+      </section>
+
+      <section class="site-shell section" data-reveal="up" id="waitlist">
+        <div class="newsletter-card" data-reveal="up">
+          <div>
+            <span class="eyebrow" style="color: var(--lime);">Launch waitlist</span>
+            <h2>Be first to try Sorty</h2>
+            <p>Sorty is in beta and launching soon. Join the waitlist to get notified when the app is available in your area.</p>
+          </div>
+          <form class="newsletter-form" data-waitlist-form>
+            <label class="sr-only" for="waitlist-email">Email address</label>
+            <input id="waitlist-email" name="email" type="email" placeholder="your@email.com" autocomplete="email" required>
+            <button class="button lime" type="submit">Notify me at launch</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="site-shell section tight" data-reveal="up">
+        <div class="contact-layout" data-reveal="up">
+          <div class="card contact-card">
+            <h2>Request a pilot</h2>
+            <p>Pilots are our primary path for municipalities, institutions, and research partners. Tell us about your textile diversion goals and we'll design a pilot program.</p>
+          </div>
+          <div class="card">
+            <a class="button coral" href="{{ url('/contact?interest=pilot') }}">Request a pilot</a>
+            <p class="form-note">Or email us directly at <a href="mailto:info@dreamstill.ca">info@dreamstill.ca</a></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-shell">
+        <div class="footer-cta">
+          <p>Ready to work together? Get in touch.</p>
+          <a class="button lime attention-gentle" href="{{ url('/contact') }}">Contact DreamStill</a>
+        </div>
+        <div class="footer-grid">
+          <div>
+            <h2>Land Acknowledgement</h2>
+            <p>DreamStill operates in Vancouver, BC, on the traditional, ancestral, and unceded territories of the Musqueam, Squamish, and Tsleil-Waututh Nations. We acknowledge the responsibilities that come with building climate solutions on these lands.</p>
+          </div>
+          <div>
+            <h3>Main Menu</h3>
+            <nav class="footer-links" aria-label="Footer main menu">
+              <a href="{{ url('/') }}">Home</a>
+              <a href="{{ url('/about') }}">About</a>
+              <a href="{{ url('/app') }}">App</a>
+              <a href="{{ url('/portfolio') }}">Experiences</a>
+              <a href="{{ url('/contact') }}">Contact</a>
+              <a href="{{ url('/investors') }}">Investors</a>
+            </nav>
+          </div>
+          <div>
+            <h3>Socials</h3>
+            <nav class="footer-links" aria-label="Social links">
+              <a href="https://www.instagram.com/dreamstilll" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://ca.linkedin.com/company/dreamstilll" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://www.facebook.com/people/DreamStill/61558387175265/" target="_blank" rel="noopener noreferrer">Facebook</a>
+            </nav>
+          </div>
+        </div>
+        <div class="footer-bottom">© 2026 DreamStill Technologies. Circular textile tools for a zero-waste future.</div>
+      </div>
+    </footer>
+
+    <div class="mobile-cta-bar" data-reveal="up" aria-label="Quick actions">
+      <a class="button coral" href="{{ url('/contact?interest=pilot') }}">Request a pilot</a>
+      <a class="button" href="#waitlist">Join waitlist</a>
+    </div>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
