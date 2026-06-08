@@ -1,51 +1,45 @@
 (function () {
-  const toggle = document.querySelector("[data-nav-toggle]");
-  const nav = document.querySelector("[data-nav-links]");
+  const toggle = document.querySelector('[data-nav-toggle]');
+  const overlay = document.querySelector('[data-nav-overlay]');
 
-  if (toggle && nav) {
-    toggle.addEventListener("click", () => {
-      const isOpen = nav.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", String(isOpen));
+  if (toggle && overlay) {
+    toggle.addEventListener('click', () => {
+      const isOpen = overlay.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     });
-  }
 
-  const slider = document.querySelector("[data-slider]");
-  if (slider) {
-    const slides = slider.querySelector("[data-slides]");
-    const dots = Array.from(slider.querySelectorAll("[data-slide-dot]"));
-    let current = 0;
-
-    const goToSlide = (index) => {
-      current = index;
-      slides.style.transform = `translateX(-${current * 100}%)`;
-      dots.forEach((dot, dotIndex) => {
-        dot.classList.toggle("active", dotIndex === current);
-        dot.setAttribute("aria-pressed", String(dotIndex === current));
+    overlay.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        overlay.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
       });
-    };
-
-    dots.forEach((dot, index) => {
-      dot.addEventListener("click", () => goToSlide(index));
     });
-
-    window.setInterval(() => {
-      goToSlide((current + 1) % dots.length);
-    }, 5200);
   }
 
-  const contactForm = document.querySelector("[data-contact-form]");
-  if (contactForm) {
-    contactForm.addEventListener("submit", (event) => {
-      event.preventDefault();
+  const params = new URLSearchParams(window.location.search);
+  const inquiryType = params.get('type');
+  const hiddenField = document.querySelector('input[name="inquiry_type"]');
+  const selectField = document.querySelector('select[name="inquiry_type_select"]');
 
-      const formData = new FormData(contactForm);
-      const name = formData.get("name") || "there";
-      const subject = encodeURIComponent(`DreamStill website inquiry from ${name}`);
-      const body = encodeURIComponent(
-        `Name: ${formData.get("name") || ""}\nEmail: ${formData.get("email") || ""}\nInterest: ${formData.get("interest") || ""}\n\n${formData.get("message") || ""}`
-      );
-
-      window.location.href = `mailto:info@dreamstill.ca?subject=${subject}&body=${body}`;
+  if (inquiryType && hiddenField) {
+    hiddenField.value = inquiryType;
+  }
+  if (inquiryType && selectField) {
+    const valid = ['general', 'pilot', 'booking', 'partner', 'investor'];
+    if (valid.includes(inquiryType)) {
+      selectField.value = inquiryType;
+    }
+  }
+  if (selectField && hiddenField) {
+    selectField.addEventListener('change', () => {
+      hiddenField.value = selectField.value;
     });
+    if (!hiddenField.value) {
+      hiddenField.value = selectField.value;
+    }
   }
 })();
