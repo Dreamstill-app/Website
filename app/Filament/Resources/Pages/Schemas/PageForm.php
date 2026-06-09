@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Pages\Schemas;
 
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
@@ -107,7 +108,7 @@ class PageForm
                     TextInput::make('image_alt')->label('Image alt text')->columnSpanFull(),
                 ])
                 ->addActionLabel('Add slide')->collapsible()
-                ->itemLabel(fn (array $state): ?string => $state['heading'] ?? 'Slide')
+                ->itemLabel(fn (?array $state): ?string => $state['heading'] ?? 'Slide')
                 ->columnSpanFull(),
         ];
     }
@@ -141,7 +142,7 @@ class PageForm
                     TextInput::make('image_alt')->label('Image alt text')->columnSpanFull(),
                 ])
                 ->addActionLabel('Add slide')->collapsible()
-                ->itemLabel(fn (array $state): ?string => $state['heading'] ?? 'Slide')
+                ->itemLabel(fn (?array $state): ?string => $state['heading'] ?? 'Slide')
                 ->columnSpanFull(),
         ];
     }
@@ -201,7 +202,7 @@ class PageForm
                     ]),
                 ])
                 ->addActionLabel('Add card')->collapsible()
-                ->itemLabel(fn (array $state): ?string => $state['heading'] ?? 'Card')
+                ->itemLabel(fn (?array $state): ?string => $state['heading'] ?? 'Card')
                 ->columnSpanFull(),
         ];
     }
@@ -231,7 +232,7 @@ class PageForm
                     TextInput::make('outcome')->label('Outcome (→ result)')->columnSpanFull(),
                 ])
                 ->addActionLabel('Add item')->collapsible()
-                ->itemLabel(fn (array $state): ?string => ($state['period'] ?? '') . (isset($state['title']) ? ' — '.$state['title'] : ''))
+                ->itemLabel(fn (?array $state): ?string => ($state['period'] ?? '') . (isset($state['title']) ? ' — '.$state['title'] : ''))
                 ->columnSpanFull(),
         ];
     }
@@ -243,22 +244,25 @@ class PageForm
                 TextInput::make('data.heading')->label('Section heading'),
                 TextInput::make('data.subtext')->label('Subtext'),
             ]),
-            Repeater::make('data.items')->label('Press items')
-                ->schema([
-                    Grid::make(2)->schema([
-                        TextInput::make('eyebrow')->label('Eyebrow')->placeholder('Media'),
-                        TextInput::make('heading')->label('Publication / Event')->required(),
-                    ]),
-                    static::imageUpload('image', 'Press image (optional)'),
-                    TextInput::make('image_alt')->label('Image alt text')->columnSpanFull(),
-                    static::richEditor('text', 'Description'),
-                    Grid::make(2)->schema([
-                        TextInput::make('link_label')->label('Link label'),
-                        TextInput::make('link_url')->label('Link URL'),
-                    ]),
-                ])
-                ->addActionLabel('Add press item')->collapsible()
-                ->itemLabel(fn (array $state): ?string => $state['heading'] ?? 'Press item')
+            Textarea::make('data.items_json')->label('Press items JSON')
+                ->rows(12)
+                ->helperText('Temporary stability mode: edit press items as JSON array objects with eyebrow, heading, image, image_alt, text, link_label, and link_url keys.')
+                ->formatStateUsing(function ($state, $record, $get) {
+                    $items = $get('data.items');
+
+                    if (is_array($items)) {
+                        return json_encode($items, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+                    }
+
+                    return is_string($state) ? $state : '[]';
+                })
+                ->dehydrateStateUsing(function ($state) {
+                    $decoded = json_decode($state ?: '[]', true);
+
+                    return json_last_error() === JSON_ERROR_NONE && is_array($decoded)
+                        ? json_encode(array_values($decoded))
+                        : '[]';
+                })
                 ->columnSpanFull(),
         ];
     }
@@ -283,7 +287,7 @@ class PageForm
                     static::imageUpload('image', 'Logo image (leave blank for text)'),
                 ])
                 ->addActionLabel('Add partner')->collapsible()
-                ->itemLabel(fn (array $state): ?string => $state['label'] ?? 'Partner')
+                ->itemLabel(fn (?array $state): ?string => $state['label'] ?? 'Partner')
                 ->columnSpanFull(),
         ];
     }
@@ -376,10 +380,11 @@ class PageForm
                 ->description('Add, reorder, and edit every section on this page. Choose a section type to reveal its specific fields.')
                 ->schema([
                     Repeater::make('sections')
-                        ->relationship()
                         ->label(false)
                         ->schema([
 
+                            Hidden::make('id'),
+                            Hidden::make('sort_order'),
                             Grid::make(2)->schema([
                                 TextInput::make('name')->label('Section label (internal)')->placeholder('e.g. Hero, Mission, Stats…')->maxLength(255),
                                 Select::make('type')
@@ -387,8 +392,7 @@ class PageForm
                                     ->options(static::sectionTypeOptions())
                                     ->default('rich_text')
                                     ->required()
-                                    ->live()
-                                    ->afterStateUpdated(fn (callable $set) => $set('data', [])),
+                                    ->live(),
                             ]),
 
                             Section::make('Hero')->schema(static::heroFields())
@@ -437,7 +441,7 @@ class PageForm
                         ->orderColumn('sort_order')
                         ->collapsible()
                         ->collapsed()
-                        ->itemLabel(fn (array $state): string =>
+                        ->itemLabel(fn (?array $state): string =>
                             ($state['name'] ?? '') ?: (static::sectionTypeOptions()[$state['type'] ?? ''] ?? 'Section'))
                         ->addActionLabel('Add section')
                         ->columnSpanFull(),

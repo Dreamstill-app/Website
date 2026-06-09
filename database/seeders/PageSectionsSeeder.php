@@ -329,15 +329,41 @@ class PageSectionsSeeder extends Seeder
                     ],
                 ],
                 [
+                    'name'       => 'Investor & Grant Bodies',
+                    'type'       => 'text_card',
+                    'sort_order' => 60,
+                    'data'       => [
+                        'heading' => 'Scalable climate technology with measurable impact.',
+                        'content' => '<p><strong>For investors &amp; grant bodies</strong></p><p>Sorty addresses a $500B+ global textile waste problem with a B2G and B2B SaaS model. Every scan generates diversion data that municipalities and brands need — creating a defensible data moat in circular infrastructure.</p><ul><li>4,000+ garments diverted through community programs to date</li><li>Computer vision + geospatial AI — not a simple database</li><li>Dual revenue: municipal pilots + corporate licensing</li><li>Aligned with federal and provincial circular economy mandates</li></ul><p><a href="/investors">View investor information</a> · <a href="/contact?interest=investment">Schedule a call</a></p>',
+                    ],
+                ],
+                [
+                    'name'       => 'Pilot Partners & Collaborators',
+                    'type'       => 'logo_strip',
+                    'sort_order' => 70,
+                    'data'       => [
+                        'heading' => 'Pilot partners & collaborators',
+                        'subtext' => 'Organizations working with DreamStill to test and refine Sorty.',
+                        'tags'    => [
+                            ['label' => 'UBC Slow Fibre Research Cluster'],
+                            ['label' => 'Ecorise'],
+                            ['label' => 'Slow Fashion Season'],
+                            ['label' => 'Your organization here'],
+                        ],
+                        'partners_heading' => '',
+                        'partners' => [],
+                    ],
+                ],
+                [
                     'name'       => 'Newsletter / Waitlist',
                     'type'       => 'newsletter',
                     'sort_order' => 80,
                     'data'       => [
                         'eyebrow'      => 'Launch waitlist',
                         'heading'      => 'Be first to try Sorty',
-                        'text'         => 'Sign up to be notified when Sorty launches. Early users get free premium access.',
+                        'text'         => 'Sorty is in beta and launching soon. Join the waitlist to get notified when the app is available in your area.',
                         'placeholder'  => 'your@email.com',
-                        'button_label' => 'Notify me',
+                        'button_label' => 'Notify me at launch',
                     ],
                 ],
                 [
@@ -346,10 +372,9 @@ class PageSectionsSeeder extends Seeder
                     'sort_order' => 90,
                     'data'       => [
                         'heading'       => 'Request a pilot',
-                        'text'          => 'Interested in piloting Sorty for your municipality, organization, or team? Let\'s talk.',
+                        'text'          => 'Pilots are our primary path for municipalities, institutions, and research partners. Tell us about your textile diversion goals and we\'ll design a pilot program.',
                         'buttons'       => [
-                            ['label' => 'Get in touch',    'url' => '/contact', 'style' => ''],
-                            ['label' => 'For investors',   'url' => '/investors','style' => 'light'],
+                            ['label' => 'Request a pilot', 'url' => '/contact?interest=pilot', 'style' => 'coral'],
                         ],
                         'contact_items' => [
                             ['label' => 'info@dreamstill.ca','url' => 'mailto:info@dreamstill.ca'],
@@ -395,6 +420,23 @@ class PageSectionsSeeder extends Seeder
                             ['eyebrow' => 'Education',  'heading' => 'Textile Waste Workshop',  'text' => 'An educational session on the lifecycle of clothing, the scale of textile waste, and what individuals and organizations can do.'],
                             ['eyebrow' => 'Styling',    'heading' => 'Secondhand Styling Night', 'text' => 'A fun, guided styling session using only secondhand and thrifted pieces — helping people see circular fashion as aspirational.'],
                         ],
+                    ],
+                ],
+                [
+                    'name'       => 'Booking Details',
+                    'type'       => 'text_card',
+                    'sort_order' => 30,
+                    'data'       => [
+                        'heading' => 'Premium experiences, shaped around your team.',
+                        'content' => '<p>DreamStill offers tailored experiences for retreats, offsites, conferences, community events, and celebrations. We shape each format around your goals, participant count, venue, timing, and desired level of sustainability education.</p><p>To book, contact us with your event details and we\'ll follow up with a proposal or calendar link.</p>',
+                    ],
+                ],
+                [
+                    'name'       => 'FAQ',
+                    'type'       => 'rich_text',
+                    'sort_order' => 40,
+                    'data'       => [
+                        'content' => '<div class="faq-layout"><div><span class="eyebrow">FAQ</span><h2>Everything you need to know before we design your experience.</h2></div><div class="faq-list"><details><summary>What kinds of companies do you work with?</summary><p>Any. We can design experiences for startups, enterprise teams, public institutions, nonprofits, conferences, and community groups.</p></details><details><summary>How many participants can you accommodate?</summary><p>Up to 100 participants, depending on the format, venue, materials, and facilitation needs.</p></details><details><summary>Can you travel?</summary><p>Yes. DreamStill can travel across British Columbia and discuss location needs during discovery.</p></details><details><summary>Can experiences be customized?</summary><p>Yes. Every experience can be customized around your team, audience, goals, materials, and desired tone.</p></details><details><summary>Do participants need prior experience?</summary><p>No. Experiences are beginner-friendly, but we can customize the format for higher skilled people if you wish.</p></details></div></div>',
                     ],
                 ],
                 [
@@ -456,11 +498,17 @@ class PageSectionsSeeder extends Seeder
                     'data'       => [
                         'heading'       => 'Get in touch directly',
                         'text'          => 'We respond to all enquiries within 2 business days.',
-                        'buttons'       => [],
+                        'buttons'       => [
+                            ['label' => 'Book on Calendly', 'url' => 'https://calendly.com/dreamstill/discovery-call', 'style' => 'coral'],
+                        ],
                         'contact_items' => [
                             ['label' => '778-888-8541',     'url' => 'tel:+17788888541'],
                             ['label' => 'info@dreamstill.ca','url' => 'mailto:info@dreamstill.ca'],
                             ['label' => 'Vancouver, BC, Canada','url' => ''],
+                            ['label' => 'Instagram', 'url' => 'https://www.instagram.com/dreamstilll'],
+                            ['label' => 'LinkedIn', 'url' => 'https://ca.linkedin.com/company/dreamstilll'],
+                            ['label' => 'Facebook', 'url' => 'https://www.facebook.com/people/DreamStill/61558387175265/'],
+                            ['label' => 'Join WhatsApp group', 'url' => 'https://chat.whatsapp.com/KcDCExBU7fj6HTG8Xhsups'],
                         ],
                     ],
                 ],

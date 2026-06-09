@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\HtmlString;
+use Throwable;
 
 class PageSection extends Model
 {
@@ -50,14 +52,128 @@ class PageSection extends Model
             'rich_text'   => 'sections.rich_text',
         ];
 
-        if (isset($viewMap[$this->type])) {
-            return new HtmlString(view($viewMap[$this->type], ['data' => $this->data])->render());
-        }
+        try {
+            if (isset($viewMap[$this->type])) {
+                return new HtmlString(view($viewMap[$this->type], ['data' => $this->normalizedData()])->render());
+            }
 
-        if ($this->type === 'raw_blade') {
-            return new HtmlString(Blade::render($this->data['markup'] ?? ''));
+            if ($this->type === 'raw_blade') {
+                return new HtmlString(Blade::render($this->sanitizeRawBlade($this->data['markup'] ?? '')));
+            }
+        } catch (Throwable) {
+            return new HtmlString('');
         }
 
         return new HtmlString('');
+    }
+
+    protected function normalizedData(): array
+    {
+        $data = is_array($this->data) ? $this->data : [];
+
+        return match ($this->type) {
+            'hero' => array_merge([
+                'eyebrow' => '',
+                'headline' => '',
+                'lede' => '',
+                'hero_note' => '',
+                'buttons' => [],
+                'slides' => [],
+            ], $data),
+            'page_hero' => array_merge([
+                'slider_style' => false,
+                'eyebrow' => '',
+                'heading' => '',
+                'text' => '',
+                'badge' => '',
+                'image' => null,
+                'image_alt' => '',
+                'buttons' => [],
+                'slides' => [],
+            ], $data),
+            'mission' => array_merge([
+                'eyebrow' => '',
+                'heading' => '',
+                'text' => '',
+            ], $data),
+            'stats' => array_merge([
+                'heading' => '',
+                'subtext' => '',
+                'columns' => '4',
+                'items' => [],
+                'source_note' => '',
+            ], $data),
+            'cards' => array_merge([
+                'heading' => '',
+                'subtext' => '',
+                'columns' => '2',
+                'card_class' => '',
+                'items' => [],
+            ], $data),
+            'text_card' => array_merge([
+                'heading' => '',
+                'content' => '',
+            ], $data),
+            'timeline' => array_merge([
+                'heading' => '',
+                'subtext' => '',
+                'items' => [],
+            ], $data),
+            'press' => array_merge([
+                'heading' => '',
+                'subtext' => '',
+                'items' => $this->decodeItemsFromContent($data),
+            ], Arr::except($data, ['content'])),
+            'logo_strip' => array_merge([
+                'heading' => '',
+                'subtext' => '',
+                'tags' => [],
+                'partners_heading' => '',
+                'partners' => [],
+            ], $data),
+            'newsletter' => array_merge([
+                'eyebrow' => '',
+                'heading' => '',
+                'text' => '',
+                'placeholder' => 'your@email.com',
+                'button_label' => 'Subscribe',
+            ], $data),
+            'contact_cta' => array_merge([
+                'eyebrow' => '',
+                'heading' => '',
+                'text' => '',
+                'buttons' => [],
+                'contact_items' => [],
+            ], $data),
+            'image_text' => array_merge([
+                'eyebrow' => '',
+                'heading' => '',
+                'content' => '',
+                'image' => null,
+                'image_alt' => '',
+                'image_position' => 'right',
+                'buttons' => [],
+            ], $data),
+            'rich_text' => array_merge([
+                'content' => '',
+            ], $data),
+            default => $data,
+        };
+    }
+
+    protected function decodeItemsFromContent(array $data): array
+    {
+        if (!empty($data['items']) && is_array($data['items'])) {
+            return $data['items'];
+        }
+
+        $decoded = json_decode($data['content'] ?? '[]', true);
+
+        return is_array($decoded) ? array_values($decoded) : [];
+    }
+
+    protected function sanitizeRawBlade(string $markup): string
+    {
+        return preg_replace('/@(extends|section|endsection|yield|show|parent)\b[^\n]*/i', '', $markup) ?? '';
     }
 }

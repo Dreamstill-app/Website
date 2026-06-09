@@ -8,4 +8,13 @@ use Filament\Resources\Pages\CreateRecord;
 class CreatePage extends CreateRecord
 {
     protected static string $resource = PageResource::class;
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $editor = new EditPage($this->getLivewire());
+
+        $data['sections'] = array_map([$editor, 'normalizeSection'], $data['sections'] ?? []);
+
+        return $data;
+    }
 }
