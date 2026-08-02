@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     public const ROLE_USER = 'user';
 
@@ -36,6 +37,10 @@ class User extends Authenticatable
         'city',
         'postal_prefix',
         'preferences',
+        'total_points',
+        'account_type',
+        'social_links',
+        'occupation',
     ];
 
     /**
@@ -60,6 +65,8 @@ class User extends Authenticatable
             'password' => 'hashed',
             'is_guest' => 'boolean',
             'preferences' => 'array',
+            'total_points' => 'integer',
+            'social_links' => 'array',
         ];
     }
 
@@ -90,5 +97,11 @@ class User extends Authenticatable
     public function challengeProgress(): HasMany
     {
         return $this->hasMany(ChallengeProgress::class);
+    }
+
+    /** @return HasMany<CommunityTip, $this> */
+    public function communityTips(): HasMany
+    {
+        return $this->hasMany(CommunityTip::class);
     }
 }

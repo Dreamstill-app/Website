@@ -19,6 +19,8 @@ class Event extends Model
         'location',
         'link',
         'is_published',
+        'status',
+        'submitted_by',
     ];
 
     protected function casts(): array
@@ -33,7 +35,7 @@ class Event extends Model
     /** @param Builder<static> $query */
     public function scopePublished(Builder $query): void
     {
-        $query->where('is_published', true);
+        $query->where('is_published', true)->where('status', 'approved');
     }
 
     /** @param Builder<static> $query */

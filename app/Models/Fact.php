@@ -13,6 +13,9 @@ class Fact extends Model
     protected $fillable = [
         'text',
         'category',
+        'source',
+        'source_url',
+        'year',
         'is_published',
     ];
 
