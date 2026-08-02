@@ -1,0 +1,580 @@
+openapi: 3.1.0
+info:
+  title: Sorty API
+  version: "1.0"
+  description: >
+    REST API for the Sorty app by DreamStill Technologies.
+    Auth: Sanctum bearer tokens. All responses JSON. Errors use the envelope
+    {"error": {"code": string, "message": string, "details": object|null}}.
+servers:
+  - url: https://dreamstill.ca/api/v1
+    description: Production
+  - url: http://localhost:8000/api/v1
+    description: Local development
+
+security:
+  - bearerAuth: []
+
+tags:
+  - {name: Auth}
+  - {name: Profile}
+  - {name: Sorts}
+  - {name: Bundles}
+  - {name: Locations}
+  - {name: Content, description: Events, challenges, facts}
+  - {name: Impact}
+  - {name: Chat}
+  - {name: System}
+
+paths:
+  /health:
+    get:
+      tags: [System]
+      security: []
+      summary: Health probe (DB, storage, AI reachability)
+      responses:
+        "200": {description: Healthy, content: {application/json: {schema: {$ref: "#/components/schemas/Health"}}}}
+
+  /auth/register:
+    post:
+      tags: [Auth]
+      security: []
+      summary: Register a new account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password, device_name, accepts_terms]
+              properties:
+                name: {type: string, maxLength: 100}
+                email: {type: string, format: email}
+                password: {type: string, minLength: 10}
+                device_name: {type: string, maxLength: 60}
+                accepts_terms: {type: boolean, const: true}
+      responses:
+        "201": {description: Created, content: {application/json: {schema: {$ref: "#/components/schemas/AuthToken"}}}}
+        "422": {$ref: "#/components/responses/ValidationError"}
+
+  /auth/login:
+    post:
+      tags: [Auth]
+      security: []
+      summary: Login, issue device token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password, device_name]
+              properties:
+                email: {type: string, format: email}
+                password: {type: string}
+                device_name: {type: string}
+      responses:
+        "200": {description: OK, content: {application/json: {schema: {$ref: "#/components/schemas/AuthToken"}}}}
+        "401": {$ref: "#/components/responses/Unauthorized"}
+        "429": {$ref: "#/components/responses/RateLimited"}
+
+  /auth/guest:
+    post:
+      tags: [Auth]
+      security: []
+      summary: Create a guest session (limited abilities)
+      requestBody:
+        content:
+          application/json:
+            schema: {type: object, required: [device_name], properties: {device_name: {type: string}}}
+      responses:
+        "201": {description: Guest created, content: {application/json: {schema: {$ref: "#/components/schemas/AuthToken"}}}}
+
+  /auth/guest/upgrade:
+    post:
+      tags: [Auth]
+      summary: Convert guest to full account, keeping data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password, accepts_terms]
+              properties:
+                name: {type: string}
+                email: {type: string, format: email}
+                password: {type: string, minLength: 10}
+                accepts_terms: {type: boolean, const: true}
+      responses:
+        "200": {description: Upgraded, content: {application/json: {schema: {$ref: "#/components/schemas/AuthToken"}}}}
+
+  /auth/logout:
+    post: {tags: [Auth], summary: Revoke current token, responses: {"204": {description: Logged out}}}
+  /auth/logout-all:
+    post: {tags: [Auth], summary: Revoke all tokens for user, responses: {"204": {description: All sessions revoked}}}
+  /auth/forgot-password:
+    post:
+      tags: [Auth]
+      security: []
+      summary: Send password reset email
+      requestBody:
+        required: true
+        content: {application/json: {schema: {type: object, required: [email], properties: {email: {type: string, format: email}}}}}
+      responses: {"202": {description: Accepted (always, no enumeration)}}
+  /auth/reset-password:
+    post:
+      tags: [Auth]
+      security: []
+      summary: Reset password with emailed token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [token, email, password]
+              properties: {token: {type: string}, email: {type: string}, password: {type: string, minLength: 10}}
+      responses: {"200": {description: Password reset}}
+
+  /me:
+    get:
+      tags: [Profile]
+      summary: Current user profile
+      responses:
+        "200": {description: OK, content: {application/json: {schema: {$ref: "#/components/schemas/User"}}}}
+    patch:
+      tags: [Profile]
+      summary: Update profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: {type: string}
+                city: {type: string}
+                postal_prefix: {type: string, maxLength: 3}
+                preferences: {type: object}
+      responses:
+        "200": {description: Updated, content: {application/json: {schema: {$ref: "#/components/schemas/User"}}}}
+    delete:
+      tags: [Profile]
+      summary: Delete account (30-day soft delete, then purge)
+      responses: {"204": {description: Deletion scheduled}}
+
+  /me/avatar:
+    post:
+      tags: [Profile]
+      summary: Upload avatar image
+      requestBody:
+        content:
+          multipart/form-data:
+            schema: {type: object, required: [avatar], properties: {avatar: {type: string, format: binary}}}
+      responses:
+        "200": {description: Avatar set, content: {application/json: {schema: {$ref: "#/components/schemas/User"}}}}
+
+  /sorts:
+    get:
+      tags: [Sorts]
+      summary: Paginated sort history for current user
+      parameters:
+        - {name: page, in: query, schema: {type: integer, minimum: 1}}
+        - {name: decision, in: query, schema: {$ref: "#/components/schemas/Decision"}}
+      responses:
+        "200":
+          description: OK
+          content: {application/json: {schema: {$ref: "#/components/schemas/SortPage"}}}
+    post:
+      tags: [Sorts]
+      summary: Create a sort (images + survey + markers) and run analysis
+      description: Multipart. Front image required; back/tag optional. Returns analyzed sort.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [front]
+              properties:
+                front: {type: string, format: binary}
+                back: {type: string, format: binary}
+                tag: {type: string, format: binary}
+                brand: {type: string}
+                survey: {type: string, description: JSON-encoded SurveyInput}
+                markers: {type: string, description: JSON-encoded array of DamageMarkerInput}
+      responses:
+        "201": {description: Created & analyzed, content: {application/json: {schema: {$ref: "#/components/schemas/Sort"}}}}
+        "422": {$ref: "#/components/responses/ValidationError"}
+        "429": {$ref: "#/components/responses/RateLimited"}
+
+  /sorts/{sortId}:
+    parameters: [{name: sortId, in: path, required: true, schema: {type: string, format: uuid}}]
+    get:
+      tags: [Sorts]
+      summary: Sort detail
+      responses:
+        "200": {description: OK, content: {application/json: {schema: {$ref: "#/components/schemas/Sort"}}}}
+        "404": {$ref: "#/components/responses/NotFound"}
+    patch:
+      tags: [Sorts]
+      summary: Accept or correct the recommendation (feeds training labels)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accepted: {type: boolean}
+                corrected_decision: {$ref: "#/components/schemas/Decision"}
+                feedback: {type: string, maxLength: 500}
+      responses:
+        "200": {description: Updated, content: {application/json: {schema: {$ref: "#/components/schemas/Sort"}}}}
+    delete:
+      tags: [Sorts]
+      summary: Delete a sort and its images
+      responses: {"204": {description: Deleted}}
+
+  /sorts/{sortId}/images/{type}:
+    get:
+      tags: [Sorts]
+      summary: Stream a sort image (owner or admin only)
+      parameters:
+        - {name: sortId, in: path, required: true, schema: {type: string, format: uuid}}
+        - {name: type, in: path, required: true, schema: {type: string, enum: [front, back, tag]}}
+      responses:
+        "200": {description: JPEG stream, content: {image/jpeg: {schema: {type: string, format: binary}}}}
+        "403": {$ref: "#/components/responses/Forbidden"}
+
+  /bundles:
+    get:
+      tags: [Bundles]
+      summary: List user bundles
+      responses:
+        "200": {description: OK, content: {application/json: {schema: {type: array, items: {$ref: "#/components/schemas/Bundle"}}}}}
+    post:
+      tags: [Bundles]
+      summary: Create bundle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name: {type: string}
+                decision: {$ref: "#/components/schemas/Decision"}
+                partner_location_id: {type: integer, nullable: true}
+      responses:
+        "201": {description: Created, content: {application/json: {schema: {$ref: "#/components/schemas/Bundle"}}}}
+
+  /bundles/{bundleId}:
+    parameters: [{name: bundleId, in: path, required: true, schema: {type: string, format: uuid}}]
+    patch:
+      tags: [Bundles]
+      summary: Rename / retarget bundle
+      responses: {"200": {description: Updated}}
+    delete:
+      tags: [Bundles]
+      summary: Delete bundle (sorts are kept)
+      responses: {"204": {description: Deleted}}
+
+  /bundles/{bundleId}/items:
+    post:
+      tags: [Bundles]
+      summary: Add sort to bundle
+      parameters: [{name: bundleId, in: path, required: true, schema: {type: string, format: uuid}}]
+      requestBody:
+        required: true
+        content: {application/json: {schema: {type: object, required: [sort_id], properties: {sort_id: {type: string, format: uuid}}}}}
+      responses: {"201": {description: Added}}
+
+  /locations:
+    get:
+      tags: [Locations]
+      security: []
+      summary: Partner locations near a point, filtered by type
+      parameters:
+        - {name: lat, in: query, required: true, schema: {type: number}}
+        - {name: lng, in: query, required: true, schema: {type: number}}
+        - {name: type, in: query, schema: {type: string, enum: [thrift, repair, donation, recycler, retail_takeback]}}
+        - {name: radius_km, in: query, schema: {type: number, default: 15, maximum: 100}}
+      responses:
+        "200": {description: OK, content: {application/json: {schema: {type: array, items: {$ref: "#/components/schemas/PartnerLocation"}}}}}
+
+  /events:
+    get:
+      tags: [Content]
+      security: []
+      summary: Published upcoming events
+      responses:
+        "200": {description: OK, content: {application/json: {schema: {type: array, items: {$ref: "#/components/schemas/Event"}}}}}
+
+  /challenges:
+    get:
+      tags: [Content]
+      summary: Active challenges with user progress
+      responses:
+        "200": {description: OK, content: {application/json: {schema: {type: array, items: {$ref: "#/components/schemas/Challenge"}}}}}
+  /challenges/{id}/join:
+    post:
+      tags: [Content]
+      summary: Join a challenge
+      parameters: [{name: id, in: path, required: true, schema: {type: integer}}]
+      responses: {"201": {description: Joined}}
+
+  /facts/random:
+    get:
+      tags: [Content]
+      security: []
+      summary: A random published sustainability fact
+      responses:
+        "200": {description: OK, content: {application/json: {schema: {$ref: "#/components/schemas/Fact"}}}}
+
+  /impact/me:
+    get:
+      tags: [Impact]
+      summary: Current user's impact stats
+      responses:
+        "200": {description: OK, content: {application/json: {schema: {$ref: "#/components/schemas/Impact"}}}}
+  /impact/global:
+    get:
+      tags: [Impact]
+      security: []
+      summary: Platform-wide impact stats
+      responses:
+        "200": {description: OK, content: {application/json: {schema: {$ref: "#/components/schemas/Impact"}}}}
+
+  /chat:
+    post:
+      tags: [Chat]
+      summary: Send a chat message; streams assistant reply (SSE)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [message]
+              properties:
+                conversation_id: {type: string, format: uuid, nullable: true}
+                message: {type: string, maxLength: 2000}
+                lat: {type: number, nullable: true}
+                lng: {type: number, nullable: true}
+      responses:
+        "200":
+          description: SSE stream of tokens, terminated by a `done` event carrying ChatMessage
+          content: {text/event-stream: {schema: {type: string}}}
+        "429": {$ref: "#/components/responses/RateLimited"}
+
+  /chat/conversations:
+    get:
+      tags: [Chat]
+      summary: List user's conversations
+      responses:
+        "200": {description: OK, content: {application/json: {schema: {type: array, items: {$ref: "#/components/schemas/ChatConversation"}}}}}
+  /chat/conversations/{id}:
+    get:
+      tags: [Chat]
+      summary: Messages in a conversation
+      parameters: [{name: id, in: path, required: true, schema: {type: string, format: uuid}}]
+      responses:
+        "200": {description: OK, content: {application/json: {schema: {type: array, items: {$ref: "#/components/schemas/ChatMessage"}}}}}
+
+components:
+  securitySchemes:
+    bearerAuth: {type: http, scheme: bearer}
+
+  responses:
+    ValidationError:
+      description: Validation failed
+      content: {application/json: {schema: {$ref: "#/components/schemas/Error"}}}
+    Unauthorized:
+      description: Invalid credentials or token
+      content: {application/json: {schema: {$ref: "#/components/schemas/Error"}}}
+    Forbidden:
+      description: Not allowed on this resource
+      content: {application/json: {schema: {$ref: "#/components/schemas/Error"}}}
+    NotFound:
+      description: Resource not found
+      content: {application/json: {schema: {$ref: "#/components/schemas/Error"}}}
+    RateLimited:
+      description: Too many requests
+      headers: {Retry-After: {schema: {type: integer}}}
+      content: {application/json: {schema: {$ref: "#/components/schemas/Error"}}}
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code: {type: string, examples: [validation_failed, unauthorized, rate_limited]}
+            message: {type: string}
+            details: {type: object, nullable: true}
+
+    Health:
+      type: object
+      properties:
+        status: {type: string, enum: [ok, degraded]}
+        checks: {type: object, properties: {db: {type: boolean}, storage: {type: boolean}, ai: {type: boolean}}}
+        version: {type: string}
+
+    AuthToken:
+      type: object
+      properties:
+        token: {type: string}
+        token_type: {type: string, const: Bearer}
+        expires_at: {type: string, format: date-time, nullable: true}
+        user: {$ref: "#/components/schemas/User"}
+
+    User:
+      type: object
+      properties:
+        id: {type: integer}
+        name: {type: string}
+        email: {type: string, nullable: true, description: null for guests}
+        is_guest: {type: boolean}
+        avatar_url: {type: string, nullable: true}
+        city: {type: string, nullable: true}
+        created_at: {type: string, format: date-time}
+
+    Decision:
+      type: string
+      enum: [resell, donate, repair, recycle]
+
+    DamageMarkerInput:
+      type: object
+      required: [image_type, damage_type, x, y]
+      properties:
+        image_type: {type: string, enum: [front, back]}
+        damage_type: {type: string, enum: [stain, damaged_text, shrinkage, faded_colour, pilling, tear, seam_breakage, missing_button, broken_zipper]}
+        severity: {type: integer, minimum: 1, maximum: 3}
+        x: {type: number, minimum: 0, maximum: 1}
+        y: {type: number, minimum: 0, maximum: 1}
+
+    SurveyInput:
+      type: object
+      properties:
+        reason: {type: string, enum: [dont_like, closet_cleanout, doesnt_fit]}
+        time_owned: {type: string, enum: [lt_6m, 6m_1y, 1_2y, 2_5y, gt_5y]}
+        thrifted: {type: boolean}
+        style: {type: string, enum: [fast_fashion, microtrend, athleisure, luxury, handmade, other]}
+        times_worn: {type: string, enum: [once, 1_5, 5_30, 30_50, 50_100, gt_100]}
+        purchase_price: {type: number, nullable: true}
+
+    Sort:
+      type: object
+      properties:
+        id: {type: string, format: uuid}
+        status: {type: string, enum: [pending, analyzed, accepted, rejected]}
+        decision: {$ref: "#/components/schemas/Decision"}
+        condition_score: {type: integer, minimum: 1, maximum: 4}
+        reasons: {type: array, items: {type: string}}
+        damages:
+          type: array
+          items:
+            type: object
+            properties:
+              type: {type: string}
+              severity: {type: integer}
+              source: {type: string, enum: [user, vision]}
+        price_estimate:
+          type: object
+          nullable: true
+          properties: {low: {type: number}, high: {type: number}, currency: {type: string}}
+        brand: {type: string, nullable: true}
+        category: {type: string, nullable: true}
+        images: {type: object, additionalProperties: {type: string, description: authorized URL}}
+        engine: {type: object, properties: {tree_version: {type: string}, analysis_source: {type: string}}}
+        created_at: {type: string, format: date-time}
+
+    SortPage:
+      type: object
+      properties:
+        data: {type: array, items: {$ref: "#/components/schemas/Sort"}}
+        meta: {type: object, properties: {current_page: {type: integer}, last_page: {type: integer}, total: {type: integer}}}
+
+    Bundle:
+      type: object
+      properties:
+        id: {type: string, format: uuid}
+        name: {type: string}
+        decision: {$ref: "#/components/schemas/Decision"}
+        partner_location: {$ref: "#/components/schemas/PartnerLocation"}
+        items_count: {type: integer}
+        sorts: {type: array, items: {$ref: "#/components/schemas/Sort"}}
+
+    PartnerLocation:
+      type: object
+      properties:
+        id: {type: integer}
+        name: {type: string}
+        type: {type: string, enum: [thrift, repair, donation, recycler, retail_takeback]}
+        lat: {type: number}
+        lng: {type: number}
+        address: {type: string}
+        distance_km: {type: number, nullable: true}
+        accepted_categories: {type: array, items: {type: string}}
+        website: {type: string, nullable: true}
+        phone: {type: string, nullable: true}
+        verified: {type: boolean}
+
+    Event:
+      type: object
+      properties:
+        id: {type: integer}
+        title: {type: string}
+        description: {type: string}
+        image_url: {type: string, nullable: true}
+        starts_at: {type: string, format: date-time}
+        ends_at: {type: string, format: date-time, nullable: true}
+        location: {type: string, nullable: true}
+        link: {type: string, nullable: true}
+
+    Challenge:
+      type: object
+      properties:
+        id: {type: integer}
+        title: {type: string}
+        description: {type: string}
+        points: {type: integer}
+        ends_at: {type: string, format: date-time, nullable: true}
+        joined: {type: boolean}
+        progress: {type: number}
+        completed: {type: boolean}
+
+    Fact:
+      type: object
+      properties:
+        id: {type: integer}
+        text: {type: string}
+        category: {type: string, nullable: true}
+
+    Impact:
+      type: object
+      properties:
+        sorts_total: {type: integer}
+        by_decision: {type: object, additionalProperties: {type: integer}}
+        ghg_kg_avoided: {type: number}
+        textiles_kg_diverted: {type: number}
+        period: {type: string, enum: [all_time]}
+
+    ChatConversation:
+      type: object
+      properties:
+        id: {type: string, format: uuid}
+        title: {type: string, description: first-message excerpt}
+        updated_at: {type: string, format: date-time}
+
+    ChatMessage:
+      type: object
+      properties:
+        id: {type: integer}
+        role: {type: string, enum: [user, assistant]}
+        content: {type: string}
+        suggestions: {type: array, items: {type: string}, nullable: true}
+        created_at: {type: string, format: date-time}
