@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Event extends Model
 {
@@ -36,6 +37,12 @@ class Event extends Model
     public function scopePublished(Builder $query): void
     {
         $query->where('is_published', true)->where('status', 'approved');
+    }
+
+    /** @return BelongsTo<User, $this> */
+    public function submitter(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'submitted_by');
     }
 
     /** @param Builder<static> $query */
