@@ -21,10 +21,14 @@ class DatabaseSeeder extends Seeder
                 'name' => 'DreamStill Admin',
                 'password' => bcrypt('DreamStill123#@$'),
                 'email_verified_at' => now(),
+                'role' => User::ROLE_ADMIN,
             ]
         );
 
         $this->call(CmsSeeder::class);
         $this->call(PageSectionsSeeder::class);
+        $this->call(PartnerLocationSeeder::class);
+        $this->call(BrandTierSeeder::class);
+        $this->call(ContentSeeder::class);
     }
 }
