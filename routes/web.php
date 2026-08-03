@@ -13,6 +13,25 @@ Route::get('/portfolio', [PageController::class, 'portfolio'])->name('pages.port
 Route::get('/contact', [PageController::class, 'contact'])->name('pages.contact');
 Route::get('/investors', [PageController::class, 'investors'])->name('pages.investors');
 
+// Legal pages (linked from the Sorty app's sign-up flow).
+Route::get('/terms', fn () => view('legal.show', [
+    'title' => 'Terms & Conditions',
+    'content' => file_get_contents(resource_path('views/legal/_terms_content.html')),
+]))->name('legal.terms');
+
+Route::get('/privacy', fn () => view('legal.show', [
+    'title' => 'Privacy Policy',
+    'content' => file_get_contents(resource_path('views/legal/_privacy_content.html')),
+]))->name('legal.privacy');
+
+// Sorty web demo (phone-frame build) lives at /demo — see docs/DEPLOY.md.
+Route::get('/demo', function () {
+    $index = public_path('app-demo/index.html');
+    abort_unless(file_exists($index), 404);
+
+    return response()->file($index);
+})->name('sorty.demo');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
