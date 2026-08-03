@@ -13,9 +13,11 @@
     <meta name="twitter:card" content="summary_large_image">
     <script defer data-domain="dreamstill.ca" src="https://plausible.io/js/script.js"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+    @stack('head')
   </head>
   <body>
     @yield('content')
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    @stack('scripts')
   </body>
 </html>

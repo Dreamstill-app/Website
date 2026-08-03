@@ -32,7 +32,10 @@ Route::get('/sorty', function () {
         return redirect('/demo');
     }
 
-    return view('sorty.landing');
+    return view('sorty.landing', [
+        'pageTitle' => 'Sorty — AI clothing sorting by DreamStill',
+        'metaDescription' => 'Photograph a garment and Sorty\'s AI tells you whether to resell, donate, repair, or recycle it — with real drop-off spots near you. Free, in your browser.',
+    ]);
 })->name('pages.sorty');
 
 // Sorty web demo (phone-frame build) lives at /demo — see docs/DEPLOY.md.
