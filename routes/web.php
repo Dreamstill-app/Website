@@ -35,6 +35,14 @@ Route::get('/sorty', function () {
     return view('sorty.landing', [
         'pageTitle' => 'Sorty — AI clothing sorting by DreamStill',
         'metaDescription' => 'Photograph a garment and Sorty\'s AI tells you whether to resell, donate, repair, or recycle it — with real drop-off spots near you. Free, in your browser.',
+        'navigationPages' => \App\Models\Page::published()
+            ->where('show_in_nav', true)
+            ->orderBy('id')
+            ->get(),
+        'siteSettings' => array_merge(
+            \App\Support\Cms\SiteDefaults::settings(),
+            \App\Models\SiteSetting::first()?->toArray() ?? []
+        ),
     ]);
 })->name('pages.sorty');
 
