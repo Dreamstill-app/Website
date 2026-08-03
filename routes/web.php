@@ -24,6 +24,17 @@ Route::get('/privacy', fn () => view('legal.show', [
     'content' => file_get_contents(resource_path('views/legal/_privacy_content.html')),
 ]))->name('legal.privacy');
 
+// Sorty landing page. Mobile visitors go straight into the web app —
+// the app itself IS the mobile experience.
+Route::get('/sorty', function () {
+    $ua = request()->userAgent() ?? '';
+    if (preg_match('/android|iphone|ipad|ipod|mobile/i', $ua)) {
+        return redirect('/demo');
+    }
+
+    return view('sorty.landing');
+})->name('pages.sorty');
+
 // Sorty web demo (phone-frame build) lives at /demo — see docs/DEPLOY.md.
 Route::get('/demo', function () {
     $index = public_path('app-demo/index.html');

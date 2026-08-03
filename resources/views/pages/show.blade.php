@@ -13,6 +13,7 @@
             <a class="{{ request()->is(ltrim($navPage->route_path, '/')) || ($navPage->is_homepage && request()->path() === '/') ? 'active' : '' }}" href="{{ url($navPage->route_path) }}">{{ $navPage->nav_label ?: $navPage->title }}</a>
           @endforeach
         </nav>
+        <a class="button" href="{{ url('/sorty') }}" style="background: linear-gradient(135deg, #6C63FF, #9D97FF); color: #fff; border: none;">Sorty App</a>
         <a class="button coral" href="{{ url($siteSettings['header_cta_url'] ?? '/contact') }}">{{ $siteSettings['header_cta_label'] ?? "Let's talk" }}</a>
       </div>
     </header>
