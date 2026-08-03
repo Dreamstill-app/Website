@@ -3,8 +3,8 @@
 namespace App\Filament\Resources\Sorts\Schemas;
 
 use App\Models\Sort;
-use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ViewEntry;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -17,23 +17,9 @@ class SortInfolist
             ->components([
                 Section::make('Garment photos')
                     ->schema([
-                        Grid::make(3)->schema([
-                            ImageEntry::make('photo_front')
-                                ->label('Front')
-                                ->state(fn (Sort $record): ?string => static::imageUrl($record, 'front'))
-                                ->placeholder('No photo')
-                                ->height(220),
-                            ImageEntry::make('photo_back')
-                                ->label('Back')
-                                ->state(fn (Sort $record): ?string => static::imageUrl($record, 'back'))
-                                ->placeholder('No photo')
-                                ->height(220),
-                            ImageEntry::make('photo_tag')
-                                ->label('Brand tag')
-                                ->state(fn (Sort $record): ?string => static::imageUrl($record, 'tag'))
-                                ->placeholder('No photo')
-                                ->height(220),
-                        ]),
+                        ViewEntry::make('photos')
+                            ->view('filament.infolists.sort-photos')
+                            ->columnSpanFull(),
                     ]),
 
                 Section::make('AI recommendation')
@@ -138,12 +124,5 @@ class SortInfolist
                     ])
                     ->collapsed(),
             ]);
-    }
-
-    private static function imageUrl(Sort $record, string $type): ?string
-    {
-        return $record->images->firstWhere('type', $type)
-            ? route('admin.sort-image', ['sort' => $record->id, 'type' => $type])
-            : null;
     }
 }
