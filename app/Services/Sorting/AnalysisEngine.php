@@ -93,20 +93,24 @@ class AnalysisEngine
      */
     private function runVision(Sort $sort): ?array
     {
-        $paths = [];
+        $storage = app(ImageStorage::class);
+        $bytes = [];
 
         foreach (['front', 'back', 'tag'] as $type) {
             $image = $sort->image($type);
             if ($image !== null) {
-                $paths[$type] = app(ImageStorage::class)->absolutePath($image->path);
+                $contents = $storage->readBytes($image->path);
+                if ($contents !== null) {
+                    $bytes[$type] = $contents;
+                }
             }
         }
 
-        if ($paths === []) {
+        if ($bytes === []) {
             return null;
         }
 
-        return $this->ai->analyzeGarment($paths);
+        return $this->ai->analyzeGarment($bytes);
     }
 
     /**

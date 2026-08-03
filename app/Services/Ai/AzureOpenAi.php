@@ -27,12 +27,12 @@ class AzureOpenAi
      * analysis array, or null when unconfigured/unavailable (caller falls back
      * to rules-only — the demo must never break).
      *
-     * @param  array<string, string>  $imagePathsByType  type => absolute path (front/back/tag)
+     * @param  array<string, string>  $imageBytesByType  type => raw JPEG bytes (front/back/tag)
      * @return array{category?: string, brand?: ?string, colours?: array<int, string>,
      *               damages?: array<int, array{type: string, severity: int, image: string, location: string, size_over_threshold?: bool}>,
      *               quality_signals?: array<int, string>}|null
      */
-    public function analyzeGarment(array $imagePathsByType): ?array
+    public function analyzeGarment(array $imageBytesByType): ?array
     {
         if (! $this->isConfigured()) {
             return null;
@@ -43,11 +43,11 @@ class AzureOpenAi
             'text' => 'Analyze the garment in these photos. Photos are labeled by view.',
         ]];
 
-        foreach ($imagePathsByType as $type => $path) {
+        foreach ($imageBytesByType as $type => $bytes) {
             $content[] = ['type' => 'text', 'text' => "View: {$type}"];
             $content[] = [
                 'type' => 'image_url',
-                'image_url' => ['url' => $this->toDataUrl($path), 'detail' => 'high'],
+                'image_url' => ['url' => $this->toDataUrl($bytes), 'detail' => 'high'],
             ];
         }
 
@@ -217,11 +217,9 @@ class AzureOpenAi
         return "{$endpoint}/openai/v1/chat/completions";
     }
 
-    private function toDataUrl(string $path): string
+    private function toDataUrl(string $bytes): string
     {
-        $data = base64_encode((string) file_get_contents($path));
-
-        return "data:image/jpeg;base64,{$data}";
+        return 'data:image/jpeg;base64,'.base64_encode($bytes);
     }
 
     private function visionSystemPrompt(): string

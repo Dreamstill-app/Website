@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\User;
+use App\Services\Media\ImageStorage;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,7 +18,10 @@ class UserResource extends JsonResource
             'email' => $this->is_guest ? null : $this->email,
             'is_guest' => (bool) $this->is_guest,
             'account_type' => $this->account_type ?? 'personal',
-            'avatar_url' => $this->avatar_path ? url('/api/v1/me/avatar') : null,
+            'avatar_url' => $this->avatar_path
+                ? (app(ImageStorage::class)->publicUrl($this->avatar_path)
+                    ?? url('/api/v1/me/avatar'))
+                : null,
             'city' => $this->city,
             'total_points' => $this->total_points,
             'social_links' => $this->social_links,

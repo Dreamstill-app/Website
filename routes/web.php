@@ -3,8 +3,8 @@
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Sort;
+use App\Services\Media\ImageStorage;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('pages.about');
@@ -44,7 +44,14 @@ Route::get('/admin/sort-image/{sort}/{type}', function (Sort $sort, string $type
     $image = $sort->images()->where('type', $type)->first();
     abort_if($image === null, 404);
 
-    return Storage::disk('local')->response($image->path, null, [
+    $storage = app(ImageStorage::class);
+
+    $publicUrl = $storage->publicUrl($image->path);
+    if ($publicUrl !== null) {
+        return redirect()->away($publicUrl);
+    }
+
+    return $storage->response($image->path, [
         'Cache-Control' => 'private, max-age=3600',
     ]);
 })->middleware('auth')->name('admin.sort-image');

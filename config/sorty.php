@@ -10,6 +10,9 @@ return [
 
     'tree_version' => env('SORTY_DECISION_TREE_VERSION', '1.0'),
 
+    // Media disk: 'local' (private, API-served) or 'azure' (public CDN URLs).
+    'media_disk' => env('SORTY_MEDIA_DISK', 'local'),
+
     'analyze_daily_quota' => (int) env('SORTY_ANALYZE_DAILY_QUOTA', 50),
 
     // Resell price threshold (CAD): estimates below this route to Donate.

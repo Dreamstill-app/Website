@@ -49,11 +49,11 @@ class ChatController extends Controller
         $userContent = $validated['message'];
         if ($request->hasFile('image')) {
             $stored = $images->storePrivate($request->file('image'), "chat/{$user->id}/{$conversation->id}");
-            $absolute = $images->absolutePath($stored['path']);
+            $bytes = $images->readBytes($stored['path']) ?? '';
             $userContent = [
                 ['type' => 'text', 'text' => $validated['message']],
                 ['type' => 'image_url', 'image_url' => [
-                    'url' => 'data:image/jpeg;base64,'.base64_encode((string) file_get_contents($absolute)),
+                    'url' => 'data:image/jpeg;base64,'.base64_encode($bytes),
                     'detail' => 'low',
                 ]],
             ];

@@ -60,6 +60,18 @@ return [
             'report' => false,
         ],
 
+        // Azure Blob CDN storage (public-read container; swap `url` to
+        // https://cdn.dreamstill.ca once a CDN custom domain is added).
+        'azure' => [
+            'driver' => 'azure-storage-blob',
+            'connection_string' => 'DefaultEndpointsProtocol=https;AccountName='.env('AZURE_STORAGE_NAME').';AccountKey='.env('AZURE_STORAGE_KEY').';EndpointSuffix=core.windows.net',
+            'container' => env('AZURE_STORAGE_CONTAINER', 'cdn'),
+            'url' => env('AZURE_STORAGE_URL'),
+            'is_public_container' => true,
+            'throw' => false,
+            'report' => false,
+        ],
+
     ],
 
     /*

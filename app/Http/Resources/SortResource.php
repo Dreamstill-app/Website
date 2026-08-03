@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Sort;
+use App\Services\Media\ImageStorage;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -13,10 +14,14 @@ class SortResource extends JsonResource
     {
         $analysis = $this->analysis ?? [];
 
+        $storage = app(ImageStorage::class);
+
         $images = [];
         foreach ($this->whenLoaded('images', fn () => $this->images, collect()) as $image) {
             if (in_array($image->type, ['front', 'back', 'tag'], true)) {
-                $images[$image->type] = url("/api/v1/sorts/{$this->id}/images/{$image->type}");
+                // CDN URL when on Azure; authorized API route on local disk.
+                $images[$image->type] = $storage->publicUrl($image->path)
+                    ?? url("/api/v1/sorts/{$this->id}/images/{$image->type}");
             }
         }
 

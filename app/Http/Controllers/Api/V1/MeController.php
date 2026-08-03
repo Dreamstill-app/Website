@@ -7,8 +7,6 @@ use App\Http\Resources\UserResource;
 use App\Services\Media\ImageStorage;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class MeController extends Controller
 {
@@ -48,14 +46,19 @@ class MeController extends Controller
         return response()->json(null, 204);
     }
 
-    public function avatar(Request $request, ImageStorage $images): UserResource|StreamedResponse
+    public function avatar(Request $request, ImageStorage $images)
     {
         // GET serves the avatar; POST replaces it.
         if ($request->isMethod('GET')) {
             $path = $request->user()->avatar_path;
             abort_if($path === null, 404);
 
-            return Storage::disk('local')->response($path);
+            $publicUrl = $images->publicUrl($path);
+            if ($publicUrl !== null) {
+                return redirect()->away($publicUrl);
+            }
+
+            return $images->response($path);
         }
 
         $request->validate([
